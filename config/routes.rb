@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   use_doorkeeper
 
   if Rails.env == 'staging'
-    api_subdomain = 'staging-api'
+    api_subdomain = 'stagingapi'
   else
     api_subdomain = 'api'
   end
