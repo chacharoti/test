@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  push_notification_token: MyString
+  type: 
+  string: MyString
+  user_id: 1
+  identifier: MyString
+  model: MyString
+  os_version: MyString
+  app_version: MyString
+
+two:
+  push_notification_token: MyString
+  type: 
+  string: MyString
+  user_id: 1
+  identifier: MyString
+  model: MyString
+  os_version: MyString
+  app_version: MyString

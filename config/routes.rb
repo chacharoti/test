@@ -3,6 +3,15 @@ Rails.application.routes.draw do
 
   constraints subdomain: 'api' do
     use_doorkeeper
+    namespace :api, path: nil do
+      namespace :v1 do
+        resources :devices, only: [] do
+          collection do
+            post :register
+          end
+        end
+      end
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
