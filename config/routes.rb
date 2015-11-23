@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
   use_doorkeeper
 
-  constraints subdomain: 'api' do
+  if Rails.env == 'staging'
+    api_subdomain = 'staging-api'
+  else
+    api_subdomain = 'api'
+  end
+
+  constraints subdomain: api_subdomain do
     use_doorkeeper
+
     namespace :api, path: nil do
       namespace :v1 do
         resources :devices, only: [] do
