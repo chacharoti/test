@@ -18,6 +18,12 @@ Rails.application.routes.draw do
             post :register
           end
         end
+
+        resources :users, only: [] do
+          collection do
+            post :forgot_password
+          end
+        end
       end
     end
   end
