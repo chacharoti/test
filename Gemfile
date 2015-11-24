@@ -8,6 +8,7 @@ gem 'capistrano-bundler', '~> 1.1.4'
 gem 'capistrano-rails', '~> 1.1.3'
 gem 'capistrano-rbenv', '~> 2.0.3'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
+gem 'devise', '~> 3.5', '>= 3.5.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'

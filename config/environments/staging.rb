@@ -76,4 +76,22 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Host for action mailer
+  config.action_mailer.default_url_options = { :host => 'milispace.com' }
+
+  # Mailer
+  config.action_mailer.delivery_method = :smtp
+
+  MAILER_CONFIG = YAML.load_file("#{::Rails.root}/config/mailer.yml")[::Rails.env]
+
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.sendgrid.net',
+    port:                 587,
+    domain:               'milispace.com',
+    user_name:            MAILER_CONFIG["username"],
+    password:             MAILER_CONFIG["password"],
+    authentication:       'plain',
+    enable_starttls_auto: true
+  }
 end

@@ -22,3 +22,4 @@ config/database.yml
 /config/application.yml
 .DS_Store
 .byebug_history
+config/mailer.yml
