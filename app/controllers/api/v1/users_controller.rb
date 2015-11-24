@@ -1,5 +1,5 @@
 class Api::V1::UsersController < Api::V1::BaseApiController
-  before_filter :basic_authenticate, only: [:register]
+  before_filter :basic_authenticate, only: [:forgot_password]
 
   def forgot_password
     email = params[:email]
