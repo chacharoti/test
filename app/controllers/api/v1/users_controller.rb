@@ -19,10 +19,10 @@ class Api::V1::UsersController < Api::V1::BaseApiController
                 user.update_attributes(fb_user_id: fb_user_id, fb_access_token: fb_access_token)
                 sign_up_successful(user)
               else
-                render json: {error: "Mật khẩu không chính xác!"}, status: :not_acceptable
+                render json: {error: "Wrong password!"}, status: :not_acceptable
               end
             else
-              render json: {error: "Email đã tồn tại! Vui lòng nhập mật khẩu cho tài khoản #{email} để đăng nhập!"}, status: :conflict
+              render json: {error: "Email exists! Please provide password for account #{email} to login!"}, status: :conflict
             end
           else
             strong_params[:password] = SecureRandom.hex(16) # random password
@@ -30,11 +30,11 @@ class Api::V1::UsersController < Api::V1::BaseApiController
           end
         end
       else # invalid fb_user_id and fb_access_token
-        render json: {error: "Dữ liệu không hợp lệ"}, status: :unprocessable_entity
+        render json: {error: "Invalid data"}, status: :unprocessable_entity
       end
     else
       if user = User.find_by(email: strong_params[:email])
-        render json: {error: "Email đã tồn tại"}, status: :unprocessable_entity
+        render json: {error: "Email exists!"}, status: :unprocessable_entity
       else
         sign_up_with_strong_params(strong_params)
       end
@@ -46,9 +46,9 @@ class Api::V1::UsersController < Api::V1::BaseApiController
     if email.present? && user = User.find_by(email: email)
       user.send_reset_password_instructions
 
-      render status: :ok, json: { message: "Hướng dẫn lấy lại mật khẩu đã được gửi tới email #{email}." }
+      render status: :ok, json: { message: "Change password instruction has been sent to email #{email}." }
     else
-      render status: :bad_request, json: { error: "Email không tồn tại!" }
+      render status: :bad_request, json: { error: "Invalid email!" }
     end
   end
 
