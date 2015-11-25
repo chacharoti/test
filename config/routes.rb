@@ -22,6 +22,7 @@ Rails.application.routes.draw do
         resources :users, only: [] do
           collection do
             post :forgot_password
+            post :sign_up
           end
         end
       end

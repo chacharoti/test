@@ -1,5 +1,45 @@
+require 'httparty'
+
 class Api::V1::UsersController < Api::V1::BaseApiController
-  before_filter :basic_authenticate, only: [:forgot_password]
+  skip_before_action :require_doorkeeper_authorization, only: [:sign_up, :forgot_password]
+  before_filter :basic_authenticate, only: [:sign_up, :forgot_password]
+
+  def sign_up
+    strong_params = user_params
+    if (email = strong_params[:email]) && (fb_user_id = strong_params[:fb_user_id]) && (fb_access_token = strong_params[:fb_access_token])
+      json = HTTParty.get("https://graph.facebook.com/me?access_token=#{fb_access_token}")
+      if fb_user_id == eval(json.body)[:id] # valid fb_user_id and fb_access_token
+        if user = User.find_by(fb_user_id: fb_user_id) # fb user exists
+          user.update_attribute(:fb_access_token, fb_access_token)
+          sign_up_successful(user)
+        else
+          if user = User.find_by(email: email) # email exists
+            if password = strong_params[:password]
+              if user.valid_password?(password)
+                user.update_attributes(fb_user_id: fb_user_id, fb_access_token: fb_access_token)
+                sign_up_successful(user)
+              else
+                render json: {error: "Mật khẩu không chính xác!"}, status: :not_acceptable
+              end
+            else
+              render json: {error: "Email đã tồn tại! Vui lòng nhập mật khẩu cho tài khoản #{email} để đăng nhập!"}, status: :conflict
+            end
+          else
+            strong_params[:password] = SecureRandom.hex(16) # random password
+            sign_up_with_strong_params(strong_params)
+          end
+        end
+      else # invalid fb_user_id and fb_access_token
+        render json: {error: "Dữ liệu không hợp lệ"}, status: :unprocessable_entity
+      end
+    else
+      if user = User.find_by(email: strong_params[:email])
+        render json: {error: "Email đã tồn tại"}, status: :unprocessable_entity
+      else
+        sign_up_with_strong_params(strong_params)
+      end
+    end
+  end
 
   def forgot_password
     email = params[:email]
@@ -10,5 +50,23 @@ class Api::V1::UsersController < Api::V1::BaseApiController
     else
       render status: :bad_request, json: { error: "Email không tồn tại!" }
     end
+  end
+
+  private
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :nickname, :email, :password, :birthday, :gender, :phone_number, :fb_user_id, :fb_access_token)
+  end
+
+  def sign_up_with_strong_params strong_params
+    user = User.new(strong_params)
+    if user.save
+      sign_up_successful(user)
+    else
+      render json: {errors: user.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
+  def sign_up_successful user
+    render status: :ok, json: {user_id: user.id}
   end
 end

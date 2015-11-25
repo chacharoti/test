@@ -1,4 +1,6 @@
 class Api::V1::DevicesController < Api::V1::BaseApiController
+  skip_before_action :require_doorkeeper_authorization, only: [:register]
+  skip_before_action :require_device, only: [:register]
   before_filter :basic_authenticate, only: [:register]
 
   def register
