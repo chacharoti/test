@@ -23,6 +23,7 @@ Rails.application.routes.draw do
           collection do
             post :forgot_password
             post :sign_up
+            get :info
           end
         end
       end

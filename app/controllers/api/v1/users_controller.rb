@@ -52,6 +52,13 @@ class Api::V1::UsersController < Api::V1::BaseApiController
     end
   end
 
+  def info
+    profile_info = Api::V1::Users::ProfileSerializer.new(@current_user).serializable_hash
+    app_settings = AppSetting.public_items_for_user(@current_user)
+
+    render status: :ok, json: {profile: profile_info, app_setting: app_settings}
+  end
+
   private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :nickname, :email, :password, :birthday, :gender, :phone_number, :fb_user_id, :fb_access_token)
