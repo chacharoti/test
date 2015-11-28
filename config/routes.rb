@@ -4,8 +4,14 @@ Rails.application.routes.draw do
 
   if Rails.env == 'staging'
     api_subdomain = 'stagingapi'
+    admin_subdomain = 'stagingadmin'
   else
     api_subdomain = 'api'
+    admin_subdomain = 'admin'
+  end
+
+  constraints subdomain: admin_subdomain do
+    mount RailsAdmin::Engine => '/'
   end
 
   constraints subdomain: api_subdomain do
