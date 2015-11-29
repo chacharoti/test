@@ -21,7 +21,7 @@ class Api::V1::BaseApiController < ActionController::Base
   end
 
   def require_user
-    unless (@current_user ||= User.find(doorkeeper_token[:resource_owner_id]))
+    unless (doorkeeper_token.present? && @current_user ||= User.find(doorkeeper_token[:resource_owner_id]))
       head :unauthorized
     end
   end
