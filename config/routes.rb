@@ -31,6 +31,7 @@ Rails.application.routes.draw do
             post :sign_up
             get :info
             get :email_is_available
+            post :add_media
           end
         end
       end

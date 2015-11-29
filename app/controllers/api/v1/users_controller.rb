@@ -68,9 +68,19 @@ class Api::V1::UsersController < Api::V1::BaseApiController
     render status: :ok, json: {profile: profile_info, app_setting: app_settings}
   end
 
+  def add_media
+    @current_user.add_media(media_params)
+
+    render status: :ok, nothing: true
+  end
+
   private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :nickname, :email, :password, :birthday, :gender, :phone_number, :fb_user_id, :fb_access_token)
+  end
+
+  def media_params
+    params.permit(media: [:type, :file_key]).require(:media)
   end
 
   def sign_up_with_strong_params strong_params
