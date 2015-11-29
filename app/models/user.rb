@@ -4,11 +4,16 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :media, as: :owner
-  has_many :photos, as: :owner
+  has_many :devices, -> { distinct }
+  has_many :media, -> { distinct }, as: :owner
+  has_many :photos, -> { distinct }, as: :owner
 
   def unique_identifier
     Digest::SHA1.hexdigest(self.id.to_s + ENV['HASH_SALT'])
+  end
+
+  def add_device device
+    self.devices << device
   end
 
   def add_media media_params

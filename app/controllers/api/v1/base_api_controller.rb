@@ -7,6 +7,9 @@ class Api::V1::BaseApiController < ActionController::Base
     unless device_id.present? && @device = Device.find_by(id: device_id)
       head :unauthorized
     end
+    if @current_user.present?
+      @current_user.add_device(@device)
+    end
   end
 
   def basic_authenticate
