@@ -1,8 +1,8 @@
 require 'httparty'
 
 class Api::V1::UsersController < Api::V1::BaseApiController
-  skip_before_action :require_doorkeeper_authorization, only: [:sign_up, :forgot_password]
-  before_filter :basic_authenticate, only: [:sign_up, :forgot_password]
+  skip_before_action :require_doorkeeper_authorization, only: [:sign_up, :forgot_password, :email_is_available]
+  before_filter :basic_authenticate, only: [:sign_up, :forgot_password, :email_is_available]
 
   def sign_up
     strong_params = user_params
@@ -49,6 +49,15 @@ class Api::V1::UsersController < Api::V1::BaseApiController
       render status: :ok, json: { message: "Change password instruction has been sent to email #{email}." }
     else
       render status: :bad_request, json: { error: "Invalid email!" }
+    end
+  end
+
+  def email_is_available
+    email = params[:email]
+    if email.present? && User.where(email: email).exists?
+      render status: :ok, json: {is_available: false, message: "Email eixts!"}
+    else
+      render status: :ok, json: {is_available: true}
     end
   end
 

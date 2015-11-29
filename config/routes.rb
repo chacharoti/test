@@ -30,6 +30,7 @@ Rails.application.routes.draw do
             post :forgot_password
             post :sign_up
             get :info
+            get :email_is_available
           end
         end
       end
