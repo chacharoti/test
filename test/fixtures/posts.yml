@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  latitude: 1.5
+  longitude: 1.5
+  message: MyString
+  emotions_count: 1
+  comments_count: 1
+  followers_count: 1
+  interactions_count: 1
+  seen_users_count: 1
+
+two:
+  user_id: 1
+  latitude: 1.5
+  longitude: 1.5
+  message: MyString
+  emotions_count: 1
+  comments_count: 1
+  followers_count: 1
+  interactions_count: 1
+  seen_users_count: 1

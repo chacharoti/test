@@ -34,6 +34,9 @@ Rails.application.routes.draw do
             post :add_media
           end
         end
+
+        resources :posts, only: [:index] do
+        end
       end
     end
   end
