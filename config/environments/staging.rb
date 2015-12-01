@@ -94,4 +94,7 @@ Rails.application.configure do
     authentication:       'plain',
     enable_starttls_auto: true
   }
+
+  # RemoteSyslog
+  config.logger = RemoteSyslogLogger.new('logs3.papertrailapp.com', 27253)
 end

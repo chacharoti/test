@@ -11,6 +11,7 @@ gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'devise', '~> 3.5', '>= 3.5.2'
 gem 'httparty', '~> 0.13.7'
 gem 'rails_admin', '~> 0.8.1'
+gem 'remote_syslog_logger', '~> 1.0', '>= 1.0.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
