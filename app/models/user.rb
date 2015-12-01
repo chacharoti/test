@@ -18,9 +18,11 @@ class User < ActiveRecord::Base
   end
 
   def add_media media_params
+    media = []
     media_params.each do |medium_params|
-      self.media.create(medium_params)
+      media << self.media.create(medium_params)
     end
+    media
   end
 
   def update_profile_photo file_key

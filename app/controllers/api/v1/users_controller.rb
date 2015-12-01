@@ -69,15 +69,15 @@ class Api::V1::UsersController < Api::V1::BaseApiController
   end
 
   def add_media
-    @current_user.add_media(media_params)
+    media = @current_user.add_media(media_params)
 
-    render status: :ok, nothing: true
+    render json: media, each_serializer: Api::V1::Posts::MediaSerializer, root: 'media'
   end
 
   def update_profile_photo
-    @current_user.update_profile_photo(params[:profile_photo_file_key])
+    photo = @current_user.update_profile_photo(params[:profile_photo_file_key])
 
-    render status: :ok, nothing: true
+    render json: photo, serializer: Api::V1::Posts::MediaSerializer, root: 'photo'
   end
 
   private
