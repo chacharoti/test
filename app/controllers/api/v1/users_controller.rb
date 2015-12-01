@@ -74,6 +74,12 @@ class Api::V1::UsersController < Api::V1::BaseApiController
     render status: :ok, nothing: true
   end
 
+  def update_profile_photo
+    @current_user.update_profile_photo(params[:profile_photo_file_key])
+
+    render status: :ok, nothing: true
+  end
+
   private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :nickname, :email, :password, :birthday, :gender, :phone_number, :fb_user_id, :fb_access_token)

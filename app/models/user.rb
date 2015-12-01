@@ -22,4 +22,8 @@ class User < ActiveRecord::Base
       self.media.create(medium_params)
     end
   end
+
+  def update_profile_photo file_key
+    self.create_profile_photo(file_key: file_key)
+  end
 end
