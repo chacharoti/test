@@ -1,5 +1,4 @@
 class Api::V1::BaseApiController < ActionController::Base
-  protect_from_forgery with: :exception
   before_action :require_doorkeeper_authorization
   before_action :require_device
 
