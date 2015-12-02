@@ -39,6 +39,7 @@ Rails.application.routes.draw do
         resources :posts, only: [:index] do
           member do
             resources :comments, only: [:index]
+            resources :emotions, only: [:index]
           end
         end
       end
