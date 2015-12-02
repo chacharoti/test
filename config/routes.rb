@@ -37,6 +37,9 @@ Rails.application.routes.draw do
         end
 
         resources :posts, only: [:index] do
+          member do
+            resources :comments, only: [:index]
+          end
         end
       end
     end

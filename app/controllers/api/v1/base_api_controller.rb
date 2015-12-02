@@ -28,4 +28,11 @@ class Api::V1::BaseApiController < ActionController::Base
       head :unauthorized
     end
   end
+
+  def require_post
+    post_id = params[:id] || params[:post_id]
+    unless @post = Post.find_by(id: post_id)
+      render nothing: true, status: :unprocessable_entity
+    end
+  end
 end
