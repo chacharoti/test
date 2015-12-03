@@ -40,6 +40,7 @@ Rails.application.routes.draw do
           member do
             resources :comments, only: [:index]
             resources :emotions, only: [:index]
+            get :followers
           end
         end
       end
