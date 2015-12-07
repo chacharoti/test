@@ -26,6 +26,9 @@ class User < ActiveRecord::Base
   end
 
   def update_profile_photo file_key
+    if old_profile_photo = self.profile_photo
+      old_profile_photo.destroy
+    end
     self.create_profile_photo(file_key: file_key)
   end
 end
