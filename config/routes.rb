@@ -43,6 +43,9 @@ Rails.application.routes.draw do
             get :followers
           end
         end
+
+        resources :packets, only: [:index] do
+        end
       end
     end
   end
