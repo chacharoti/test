@@ -8,4 +8,8 @@ class AppSetting < ActiveRecord::Base
     end
     items
   end
+
+  def self.media_url
+    AppSetting.find_by(key: "media_url").value
+  end
 end

@@ -1,4 +1,57 @@
 RailsAdmin.config do |config|
+  config.model 'Photo' do
+    configure :thumbnail_url do
+      pretty_value do
+        object = bindings[:object]
+        %{<a target="_blank" href=#{object.thumbnail_url}>#{object.file_key}</a >}.html_safe
+      end
+      read_only true # won't be editable in forms (alternatively, hide it in edit section)
+    end
+
+    configure :normal_url do
+      pretty_value do
+        object = bindings[:object]
+        %{<a target="_blank" href=#{object.normal_url}>#{object.file_key}</a >}.html_safe
+      end
+      read_only true # won't be editable in forms (alternatively, hide it in edit section)
+    end
+  end
+
+  config.model 'ProfilePhoto' do
+    configure :thumbnail_url do
+      pretty_value do
+        object = bindings[:object]
+        %{<a target="_blank" href=#{object.thumbnail_url}>#{object.file_key}</a >}.html_safe
+      end
+      read_only true # won't be editable in forms (alternatively, hide it in edit section)
+    end
+
+    configure :normal_url do
+      pretty_value do
+        object = bindings[:object]
+        %{<a target="_blank" href=#{object.normal_url}>#{object.file_key}</a >}.html_safe
+      end
+      read_only true # won't be editable in forms (alternatively, hide it in edit section)
+    end
+  end
+
+  config.model 'Video' do
+    configure :thumbnail_url do
+      pretty_value do
+        object = bindings[:object]
+        %{<a target="_blank" href=#{object.thumbnail_url}>#{object.file_key}</a >}.html_safe
+      end
+      read_only true # won't be editable in forms (alternatively, hide it in edit section)
+    end
+
+    configure :video_url do
+      pretty_value do
+        object = bindings[:object]
+        %{<a target="_blank" href=#{object.video_url}>#{object.file_key}</a >}.html_safe
+      end
+      read_only true # won't be editable in forms (alternatively, hide it in edit section)
+    end
+  end
 
   ### Popular gems integration
 
