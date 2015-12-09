@@ -1,4 +1,4 @@
-class Api::V1::PacketsController < ApplicationController
+class Api::V1::PacketsController < Api::V1::BaseApiController
   skip_before_action :require_doorkeeper_authorization, only: [:index]
 
   def index
