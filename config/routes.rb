@@ -39,7 +39,11 @@ Rails.application.routes.draw do
         resources :posts, only: [:index] do
           member do
             resources :comments, only: [:index, :create]
-            resources :emotions, only: [:index]
+            resources :emotions, only: [:index, :create] do
+              collection do
+                post :remove
+              end
+            end
             get :followers
             post :follow
             post :unfollow

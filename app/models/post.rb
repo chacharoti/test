@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   has_one :video, as: :owner
   has_many :comments, class_name: 'CommentPostUser', dependent: :destroy
   has_many :emotions, class_name: 'EmotionPostUser', dependent: :destroy
-  has_many :post_user_follows, -> { uniq }, dependent: :destroy
+  has_many :post_user_follows, dependent: :destroy
   has_many :followers, through: :post_user_follows, source: :user
 
   def add_comment user, params
@@ -19,5 +19,15 @@ class Post < ActiveRecord::Base
 
   def unfollowed_by user
     self.post_user_follows.where(user_id: user.id).destroy_all
+  end
+
+  def add_emotion user, emotion_params
+    if self.emotions.where(user_id: user.id).count == 0
+      self.emotions.create(user_id: user.id, emotion_id: emotion_params[:id])
+    end
+  end
+
+  def remove_emotion user
+    self.emotions.where(user_id: user.id).destroy_all
   end
 end
