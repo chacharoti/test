@@ -30,4 +30,12 @@ class Post < ActiveRecord::Base
   def remove_emotion user
     self.emotions.where(user_id: user.id).destroy_all
   end
+
+  def added_emotion_already_by user
+    self.emotions.exists?(user_id: user.id)
+  end
+
+  def followed_already_by user
+    self.post_user_follows.exists?(user_id: user.id)
+  end
 end
