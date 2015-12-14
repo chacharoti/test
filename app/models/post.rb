@@ -6,6 +6,9 @@ class Post < ActiveRecord::Base
   has_many :emotions, class_name: 'EmotionPostUser', dependent: :destroy
   has_many :post_user_follows, dependent: :destroy
   has_many :followers, through: :post_user_follows, source: :user
+  has_many :post_user_seens, dependent: :destroy
+  has_many :seen_users, through: :post_user_seens, source: :user
+  has_many :top_seen_users, -> { limit(5) }, through: :post_user_seens, source: :user
 
   def add_comment user, params
     self.comments.create(params.merge(user_id: user.id))

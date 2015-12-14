@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151214091842) do
+ActiveRecord::Schema.define(version: 20151214164054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20151214091842) do
     t.datetime "updated_at",                   null: false
   end
 
-  add_index "comment_post_users", ["post_id", "user_id"], name: "index_comment_post_users_on_post_id_and_user_id", using: :btree
+  add_index "comment_post_users", ["post_id"], name: "index_comment_post_users_on_post_id", using: :btree
 
   create_table "devices", force: :cascade do |t|
     t.string   "push_notification_token"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20151214091842) do
     t.datetime "updated_at",                   null: false
   end
 
-  add_index "emotion_post_users", ["emotion_id", "post_id", "user_id"], name: "index_emotion_post_users_on_emotion_id_and_post_id_and_user_id", using: :btree
+  add_index "emotion_post_users", ["post_id"], name: "index_emotion_post_users_on_post_id", using: :btree
 
   create_table "emotions", force: :cascade do |t|
     t.string   "name"
@@ -140,6 +140,19 @@ ActiveRecord::Schema.define(version: 20151214091842) do
     t.float    "longitude"
   end
 
+  add_index "post_user_follows", ["post_id"], name: "index_post_user_follows_on_post_id", using: :btree
+
+  create_table "post_user_seens", force: :cascade do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "post_user_seens", ["post_id"], name: "index_post_user_seens_on_post_id", using: :btree
+
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id"
     t.float    "latitude"
@@ -152,6 +165,8 @@ ActiveRecord::Schema.define(version: 20151214091842) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end
+
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
