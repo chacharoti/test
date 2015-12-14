@@ -4,4 +4,8 @@ class Api::V1::Posts::PostSerializer < ActiveModel::Serializer
   has_one :user, serializer: Api::V1::Posts::UserSerializer
   has_many :photos, serializer: Api::V1::Posts::MediaSerializer
   has_one :video, serializer: Api::V1::Posts::MediaSerializer
+
+  def interactions_count
+    object.emotions_count + object.comments_count + object.followers_count
+  end
 end
