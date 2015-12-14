@@ -65,8 +65,9 @@ class Api::V1::UsersController < Api::V1::BaseApiController
     profile_info = Api::V1::Users::ProfileSerializer.new(@current_user).serializable_hash
     app_settings = AppSetting.public_items_for_user(@current_user)
     @packets = Packet.get_new_packets(params[:old_packets])
+    @emotions = Emotion.all
 
-    render status: :ok, json: {profile: profile_info, app_setting: app_settings, packets: packets_json}
+    render status: :ok, json: {profile: profile_info, app_setting: app_settings, packets: packets_json, emotions: emotions_json}
   end
 
   def add_media
@@ -105,7 +106,13 @@ class Api::V1::UsersController < Api::V1::BaseApiController
 
   def packets_json
     @packets.map do |packet|
-      Api::V1::Packets::PacketSerializer.new(packet)
+      Api::V1::Packets::PacketSerializer.new(packet, root: false)
+    end
+  end
+
+  def emotions_json
+    @emotions.map do |emotion|
+      Api::V1::Posts::EmotionTypeSerializer.new(emotion, root: false)
     end
   end
 end
