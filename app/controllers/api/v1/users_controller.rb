@@ -64,8 +64,9 @@ class Api::V1::UsersController < Api::V1::BaseApiController
   def info
     profile_info = Api::V1::Users::ProfileSerializer.new(@current_user).serializable_hash
     app_settings = AppSetting.public_items_for_user(@current_user)
+    @packets = Packet.get_new_packets(params[:old_packets])
 
-    render status: :ok, json: {profile: profile_info, app_setting: app_settings}
+    render status: :ok, json: {profile: profile_info, app_setting: app_settings, packets: packets_json}
   end
 
   def add_media
@@ -100,5 +101,11 @@ class Api::V1::UsersController < Api::V1::BaseApiController
 
   def sign_up_successful user
     render status: :ok, json: {user_id: user.id}
+  end
+
+  def packets_json
+    @packets.map do |packet|
+      Api::V1::Packets::PacketSerializer.new(packet)
+    end
   end
 end
