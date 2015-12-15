@@ -1,7 +1,7 @@
 class Packet < ActiveRecord::Base
   def self.get_new_packets old_packets
+    all_packets = Packet.where(is_public: 1)
     if old_packets.present?
-      all_packets = Packet.where(is_public: 1)
       old_packet_names = old_packets.map do |packet_data|
         packet_data[:name]
       end
