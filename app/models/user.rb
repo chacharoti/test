@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :devices, -> { distinct }
   has_many :media, -> { distinct }, as: :owner
   has_many :photos, -> { distinct }, as: :owner
+  has_many :posts
 
   def unique_identifier
     Digest::SHA1.hexdigest(self.id.to_s + ENV['HASH_SALT'])
@@ -30,5 +31,9 @@ class User < ActiveRecord::Base
       old_profile_photo.destroy
     end
     self.create_profile_photo(file_key: file_key)
+  end
+
+  def add_new_post params
+    self.posts.create(params)
   end
 end

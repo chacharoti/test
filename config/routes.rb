@@ -36,7 +36,7 @@ Rails.application.routes.draw do
           end
         end
 
-        resources :posts, only: [:index] do
+        resources :posts, only: [:index, :create] do
           member do
             resources :comments, only: [:index, :create]
             resources :emotions, only: [:index, :create] do

@@ -25,8 +25,20 @@ class Api::V1::PostsController < Api::V1::BaseApiController
     render json: {success: true}, status: :ok
   end
 
+  def create
+    if post = @current_user.add_new_post(create_post_params)
+      render json: {post_id: post.id}, status: :ok
+    else
+      render json: {error: @current_user.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
   private
   def follow_params
     params.require(:follow).permit(:latitude, :longitude)
+  end
+
+  def create_post_params
+    params.require(:post).permit(:message, :latitude, :longitude)
   end
 end
