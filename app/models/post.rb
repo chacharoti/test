@@ -26,7 +26,7 @@ class Post < ActiveRecord::Base
 
   def add_emotion user, emotion_params
     if self.emotions.where(user_id: user.id).count == 0
-      self.emotions.create(user_id: user.id, emotion_id: emotion_params[:id])
+      self.emotions.create(user_id: user.id, emotion_type_id: emotion_params[:emotion_type_id])
     end
   end
 

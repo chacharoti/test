@@ -2,7 +2,7 @@ class Api::V1::EmotionsController < Api::V1::BaseApiController
   before_action :require_post, only: [:index, :create, :remove]
 
   def index
-    @emotions = @post.emotions.includes([:emotion, {user: [:profile_photo]}])
+    @emotions = @post.emotions.includes([:emotion_type, {user: [:profile_photo]}])
 
     render json: @emotions, each_serializer: Api::V1::Posts::EmotionSerializer
   end
@@ -21,6 +21,6 @@ class Api::V1::EmotionsController < Api::V1::BaseApiController
 
   private
   def emotion_params
-    params.require(:emotion).permit(:id)
+    params.require(:emotion).permit(:emotion_type_id)
   end
 end

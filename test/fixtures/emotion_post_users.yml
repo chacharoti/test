@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  emotion_id: 1
+  emotion_type_id: 1
   post_id: 1
   user_id: 1
   latitude: 1.5
@@ -9,7 +9,7 @@ one:
   user_likes_count: MyString
 
 two:
-  emotion_id: 1
+  emotion_type_id: 1
   post_id: 1
   user_id: 1
   latitude: 1.5
