@@ -72,6 +72,12 @@ class Api::V1::UsersController < Api::V1::BaseApiController
 
   def add_media
     media = @current_user.add_media(media_params)
+    for medium in media
+      unless medium.valid?
+        render json: {errors: medium.errors.full_messages}, status: :unprocessable_entity
+        return
+      end
+    end
 
     render json: media, each_serializer: Api::V1::Posts::MediaSerializer, root: 'media'
   end
@@ -88,7 +94,7 @@ class Api::V1::UsersController < Api::V1::BaseApiController
   end
 
   def media_params
-    params.permit(media: [:type, :file_key]).require(:media)
+    params.permit(media: [:type, :file_key, meta_data: [:thumbnail_size, :normal_size, :duration]]).require(:media)
   end
 
   def sign_up_with_strong_params strong_params
