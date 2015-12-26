@@ -83,7 +83,7 @@ class Api::V1::UsersController < Api::V1::BaseApiController
   end
 
   def update_profile_photo
-    photo = @current_user.update_profile_photo(params[:profile_photo_file_key])
+    photo = @current_user.update_profile_photo(profile_photo_params)
 
     render json: photo, serializer: Api::V1::Posts::MediaSerializer, root: 'photo'
   end
@@ -95,6 +95,10 @@ class Api::V1::UsersController < Api::V1::BaseApiController
 
   def media_params
     params.permit(media: [:type, :file_key, meta_data: [:thumbnail_size, :normal_size, :duration]]).require(:media)
+  end
+
+  def profile_photo_params
+    params.require(:profile_photo).permit(:file_key, meta_data: [:thumbnail_size, :normal_size])
   end
 
   def sign_up_with_strong_params strong_params

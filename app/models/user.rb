@@ -26,11 +26,11 @@ class User < ActiveRecord::Base
     media
   end
 
-  def update_profile_photo file_key
+  def update_profile_photo profile_photo_params
     if old_profile_photo = self.profile_photo
       old_profile_photo.destroy
     end
-    self.create_profile_photo(file_key: file_key)
+    self.create_profile_photo(profile_photo_params)
   end
 
   def add_new_post params
