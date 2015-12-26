@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216033305) do
+ActiveRecord::Schema.define(version: 20151225055126) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20151216033305) do
     t.string   "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text     "meta_data"
   end
 
   add_index "media", ["owner_type", "owner_id"], name: "media_indexes", using: :btree

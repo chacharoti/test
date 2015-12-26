@@ -10,6 +10,8 @@ class Post < ActiveRecord::Base
   has_many :seen_users, through: :post_user_seens, source: :user
   has_many :top_seen_users, -> { limit(5) }, through: :post_user_seens, source: :user
 
+  accepts_nested_attributes_for :photos
+
   def add_comment user, params
     self.comments.create(params.merge(user_id: user.id))
   end

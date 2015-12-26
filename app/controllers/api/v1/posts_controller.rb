@@ -26,10 +26,11 @@ class Api::V1::PostsController < Api::V1::BaseApiController
   end
 
   def create
-    if post = @current_user.add_new_post(create_post_params)
+    post = @current_user.add_new_post(create_post_params)
+    if post.valid?
       render json: {post_id: post.id}, status: :ok
     else
-      render json: {error: @current_user.errors.full_messages}, status: :unprocessable_entity
+      render json: {errors: post.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
@@ -39,6 +40,6 @@ class Api::V1::PostsController < Api::V1::BaseApiController
   end
 
   def create_post_params
-    params.require(:post).permit(:message, :latitude, :longitude)
+    params.require(:post).permit(:message, :latitude, :longitude, photos_attributes: [:file_key, meta_data: [:thumbnail_size, :normal_size]])
   end
 end
