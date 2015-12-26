@@ -40,6 +40,6 @@ class Api::V1::PostsController < Api::V1::BaseApiController
   end
 
   def create_post_params
-    params.require(:post).permit(:message, :latitude, :longitude, photos_attributes: [:file_key, meta_data: [:thumbnail_size, :normal_size]])
+    params.require(:post).permit(:message, :latitude, :longitude, photos_attributes: [:file_key, meta_data: [:thumbnail_size, :normal_size]], video_attributes: [:file_key, meta_data: [:thumbnail_size, :duration]])
   end
 end

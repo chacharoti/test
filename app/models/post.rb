@@ -1,7 +1,12 @@
 class Post < ActiveRecord::Base
   belongs_to :user
+
   has_many :photos, -> { uniq }, as: :owner
+  accepts_nested_attributes_for :photos
+
   has_one :video, as: :owner
+  accepts_nested_attributes_for :video
+
   has_many :comments, class_name: 'CommentPostUser', dependent: :destroy
   has_many :emotions, class_name: 'EmotionPostUser', dependent: :destroy
   has_many :post_user_follows, dependent: :destroy
@@ -9,8 +14,6 @@ class Post < ActiveRecord::Base
   has_many :post_user_seens, dependent: :destroy
   has_many :seen_users, through: :post_user_seens, source: :user
   has_many :top_seen_users, -> { limit(5) }, through: :post_user_seens, source: :user
-
-  accepts_nested_attributes_for :photos
 
   def add_comment user, params
     self.comments.create(params.merge(user_id: user.id))
