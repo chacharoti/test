@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'pg', '~> 0.18.4'
 gem 'doorkeeper', '~> 3.0', '>= 3.0.1'
-gem 'active_model_serializers', '~> 0.9.3'
+gem 'active_model_serializers', '~> 0.9.3', git: 'https://github.com/rails-api/active_model_serializers.git', branch: '0-9-stable'
 gem 'capistrano', '~> 3.4.0'
 gem 'capistrano-bundler', '~> 1.1.4'
 gem 'capistrano-rails', '~> 1.1.3'

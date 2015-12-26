@@ -2,7 +2,7 @@ class Api::V1::PostsController < Api::V1::BaseApiController
   before_action :require_post, only: [:followers, :follow, :unfollow]
 
   def index
-    @posts = Post.includes({user: [:profile_photo]}, :photos, :video).order("id DESC").to_a
+    @posts = Post.includes({user: [:profile_photo]}, :photos, :video, {top_comment: [:user]}, {top_emotion: [:user]}, :top_follower).order("id DESC").to_a
 
     render json: @posts, each_serializer: Api::V1::Posts::PostSerializer, current_user: @current_user
   end
