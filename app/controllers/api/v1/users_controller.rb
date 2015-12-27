@@ -85,7 +85,11 @@ class Api::V1::UsersController < Api::V1::BaseApiController
   def update_profile_photo
     photo = @current_user.update_profile_photo(profile_photo_params)
 
-    render json: photo, serializer: Api::V1::Posts::MediaSerializer, root: 'photo'
+    if photo.valid?
+      render json: photo, serializer: Api::V1::Posts::MediaSerializer, root: 'photo'
+    else
+      render json: {errors: photo.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   private
