@@ -13,20 +13,12 @@ Doorkeeper.configure do
       if user = User.find_by(email: username)
         if user.valid_password?(password)
           user
-        else
-          redirect_to('/')
         end
       elsif user = User.find_by(fb_user_id: username)
         if user.fb_acress_token == password
           user
-        else
-          redirect_to('/')
         end
-      else
-        redirect_to('/')
       end
-    else
-      redirect_to('/')
     end
   end
 
