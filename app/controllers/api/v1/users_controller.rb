@@ -79,14 +79,14 @@ class Api::V1::UsersController < Api::V1::BaseApiController
       end
     end
 
-    render json: media, each_serializer: Api::V1::Posts::MediaSerializer, root: 'media'
+    render json: media, each_serializer: Api::V1::MediaSerializer, root: 'media'
   end
 
   def update_profile_photo
     photo = @current_user.update_profile_photo(profile_photo_params)
 
     if photo.valid?
-      render json: photo, serializer: Api::V1::Posts::MediaSerializer, root: 'photo'
+      render json: photo, serializer: Api::V1::MediaSerializer, root: 'photo'
     else
       render json: {errors: photo.errors.full_messages}, status: :unprocessable_entity
     end
@@ -100,6 +100,12 @@ class Api::V1::UsersController < Api::V1::BaseApiController
     else
       render json: {errors: location.errors.full_messages}, status: :unprocessable_entity
     end
+  end
+
+  def nearby
+    page = (params[:page] || 1).to_i
+    users = User.page(page).per(AppSetting.nearby_people_page_size).to_a
+    render json: users, each_serializer: Api::V1::Users::NearbySerializer, root: 'nearby'
   end
 
   private

@@ -34,6 +34,7 @@ Rails.application.routes.draw do
             post :add_media
             post :update_profile_photo
             post :update_location
+            get :nearby
           end
         end
 

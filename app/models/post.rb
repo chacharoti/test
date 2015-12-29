@@ -13,7 +13,7 @@ class Post < ActiveRecord::Base
   has_many :followers, through: :post_user_follows, source: :user
 
   has_many :post_user_seens, dependent: :destroy
-  has_many :seen_users, through: :post_user_seens, source: :user
+  has_many :seen_users, through: :post_user_seens, source: :user, dependent: :destroy
   has_many :top_seen_users, -> { limit(5) }, through: :post_user_seens, source: :user
 
   has_one :top_comment, -> { order('user_likes_count DESC, created_at ASC') }, class_name: 'CommentPostUser'

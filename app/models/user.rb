@@ -6,9 +6,10 @@ class User < ActiveRecord::Base
 
   has_one :profile_photo, as: :owner
   has_many :devices, -> { distinct }
-  has_many :media, -> { distinct }, as: :owner
-  has_many :photos, -> { distinct }, as: :owner
-  has_many :posts
+  has_many :media, -> { distinct }, as: :owner, dependent: :destroy
+  has_many :photos, -> { distinct }, as: :owner, dependent: :destroy
+  has_many :top_photos, -> { order("id DESC").limit(5) }, class_name: "Photo", as: :owner
+  has_many :posts, dependent: :destroy
   has_many :locations, class_name: 'UserLocation', dependent: :destroy
 
   def unique_identifier
@@ -40,5 +41,21 @@ class User < ActiveRecord::Base
 
   def update_location params
     self.locations.create(params)
+  end
+
+  def current_location
+    self.locations.order(:id).last
+  end
+
+  def latitude
+    if location = self.current_location
+      location.latitude
+    end
+  end
+
+  def longitude
+    if location = self.current_location
+      location.longitude
+    end
   end
 end
