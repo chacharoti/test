@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :media, -> { distinct }, as: :owner
   has_many :photos, -> { distinct }, as: :owner
   has_many :posts
+  has_many :locations, class_name: 'UserLocation', dependent: :destroy
 
   def unique_identifier
     Digest::SHA1.hexdigest(self.id.to_s + ENV['HASH_SALT'])
@@ -35,5 +36,9 @@ class User < ActiveRecord::Base
 
   def add_new_post params
     self.posts.create(params)
+  end
+
+  def update_location params
+    self.locations.create(params)
   end
 end

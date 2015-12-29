@@ -33,6 +33,7 @@ Rails.application.routes.draw do
             get :email_is_available
             post :add_media
             post :update_profile_photo
+            post :update_location
           end
         end
 

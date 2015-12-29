@@ -92,6 +92,16 @@ class Api::V1::UsersController < Api::V1::BaseApiController
     end
   end
 
+  def update_location
+    location = @current_user.update_location(update_location_params)
+
+    if location.valid?
+      render json: {location_id: location.id}, status: :ok
+    else
+      render json: {errors: location.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
   private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :nickname, :email, :password, :birthday, :gender, :phone_number, :fb_user_id, :fb_access_token)
@@ -128,5 +138,9 @@ class Api::V1::UsersController < Api::V1::BaseApiController
     @emotion_types.map do |emotion_type|
       Api::V1::Posts::EmotionTypeSerializer.new(emotion_type, root: false)
     end
+  end
+
+  def update_location_params
+    params.require(:location).permit(:latitude, :longitude)
   end
 end
