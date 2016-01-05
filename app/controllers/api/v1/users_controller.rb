@@ -13,7 +13,7 @@ class Api::V1::UsersController < Api::V1::BaseApiController
           user.update_attribute(:fb_access_token, fb_access_token)
           sign_up_successful(user)
         else
-          if user = User.find_by(email: email) # email exists
+          if user = User.find_for_authentication(email: email) # email exists
             if password = strong_params[:password]
               if user.valid_password?(password)
                 user.update_attributes(fb_user_id: fb_user_id, fb_access_token: fb_access_token)
@@ -33,7 +33,7 @@ class Api::V1::UsersController < Api::V1::BaseApiController
         render json: {error: "Invalid data"}, status: :unprocessable_entity
       end
     else
-      if user = User.find_by(email: strong_params[:email])
+      if user = User.find_for_authentication(email: strong_params[:email])
         render json: {error: "Email exists!"}, status: :unprocessable_entity
       else
         sign_up_with_strong_params(strong_params)
@@ -43,7 +43,7 @@ class Api::V1::UsersController < Api::V1::BaseApiController
 
   def forgot_password
     email = params[:email]
-    if email.present? && user = User.find_by(email: email)
+    if email.present? && user = User.find_for_authentication(email: email)
       user.send_reset_password_instructions
 
       render status: :ok, json: { message: "Change password instruction has been sent to email #{email}." }
@@ -54,8 +54,8 @@ class Api::V1::UsersController < Api::V1::BaseApiController
 
   def email_is_available
     email = params[:email]
-    if email.present? && User.where(email: email).exists?
-      render status: :ok, json: {is_available: false, message: "Email eixts!"}
+    if email.present? && User.find_for_authentication(email: email) != nil
+      render status: :ok, json: {is_available: false, message: "Email exists!"}
     else
       render status: :ok, json: {is_available: true}
     end

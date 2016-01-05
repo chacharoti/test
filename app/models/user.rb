@@ -13,6 +13,12 @@ class User < ActiveRecord::Base
   has_many :locations, class_name: 'UserLocation', dependent: :destroy
   has_many :activities, foreign_key: 'to_user_id', dependent: :destroy
 
+  before_create :downcase_email
+
+  def downcase_email
+    self.email.downcase
+  end
+
   def unique_identifier
     Digest::SHA1.hexdigest(self.id.to_s + ENV['HASH_SALT'])
   end
