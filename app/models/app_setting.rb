@@ -16,4 +16,8 @@ class AppSetting < ActiveRecord::Base
   def self.nearby_people_page_size
     AppSetting.find_by(key: "nearby_people_page_size").value.to_i
   end
+
+  def self.activities_page_size
+    AppSetting.find_by(key: "activities_page_size").value.to_i
+  end
 end

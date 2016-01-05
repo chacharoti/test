@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :top_photos, -> { order("id DESC").limit(5) }, class_name: "Photo", as: :owner
   has_many :posts, dependent: :destroy
   has_many :locations, class_name: 'UserLocation', dependent: :destroy
+  has_many :activities, foreign_key: 'to_user_id', dependent: :destroy
 
   def unique_identifier
     Digest::SHA1.hexdigest(self.id.to_s + ENV['HASH_SALT'])
@@ -57,5 +58,9 @@ class User < ActiveRecord::Base
     if location = self.current_location
       location.longitude
     end
+  end
+
+  def recent_activities page
+    self.activities.includes(:from_user).where('deleted != 1').order('id DESC').page(page).per(AppSetting.activities_page_size)
   end
 end

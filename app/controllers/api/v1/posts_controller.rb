@@ -10,7 +10,7 @@ class Api::V1::PostsController < Api::V1::BaseApiController
   def followers
     @followers = @post.followers.includes(:profile_photo)
 
-    render json: @followers, each_serializer: Api::V1::Posts::UserSerializer, root: 'followers'
+    render json: @followers, each_serializer: Api::V1::UserSerializer, root: 'followers'
   end
 
   def follow

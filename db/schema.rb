@@ -11,10 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151229145841) do
+ActiveRecord::Schema.define(version: 20160105045542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.integer  "from_user_id"
+    t.integer  "to_user_id"
+    t.string   "type"
+    t.integer  "seen",          default: 0, null: false
+    t.integer  "read",          default: 0, null: false
+    t.integer  "deleted",       default: 0, null: false
+    t.string   "message"
+    t.integer  "connection_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "activities", ["from_user_id", "to_user_id"], name: "index_activities_on_from_user_id_and_to_user_id", using: :btree
 
   create_table "app_settings", force: :cascade do |t|
     t.string   "key"

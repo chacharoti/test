@@ -54,6 +54,9 @@ Rails.application.routes.draw do
 
         resources :packets, only: [:index] do
         end
+
+        resources :activities, only: [:index] do
+        end
       end
     end
   end
