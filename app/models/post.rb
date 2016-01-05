@@ -1,14 +1,25 @@
 class Post < ActiveRecord::Base
   belongs_to :user
+
   has_many :photos, -> { uniq }, as: :owner
+  accepts_nested_attributes_for :photos
+
   has_one :video, as: :owner
+  accepts_nested_attributes_for :video
+
   has_many :comments, class_name: 'CommentPostUser', dependent: :destroy
   has_many :emotions, class_name: 'EmotionPostUser', dependent: :destroy
   has_many :post_user_follows, dependent: :destroy
   has_many :followers, through: :post_user_follows, source: :user
+
   has_many :post_user_seens, dependent: :destroy
-  has_many :seen_users, through: :post_user_seens, source: :user
+  has_many :seen_users, through: :post_user_seens, source: :user, dependent: :destroy
   has_many :top_seen_users, -> { limit(5) }, through: :post_user_seens, source: :user
+
+  has_one :top_comment, -> { order('user_likes_count DESC, created_at ASC') }, class_name: 'CommentPostUser'
+  has_one :top_emotion, -> { order('user_likes_count DESC, created_at ASC') }, class_name: 'EmotionPostUser'
+  has_one :top_post_user_follow, -> { order('created_at ASC') }, class_name: 'PostUserFollow'
+  has_one :top_follower, through: :top_post_user_follow, source: :user
 
   def add_comment user, params
     self.comments.create(params.merge(user_id: user.id))

@@ -10,23 +10,15 @@ Doorkeeper.configure do
 
   resource_owner_from_credentials do |routes|
     if (username = params[:username]).present? && (password = params[:password]).present?
-      if user = User.find_by(email: username)
+      if user = User.find_for_authentication(email: username)
         if user.valid_password?(password)
           user
-        else
-          redirect_to('/')
         end
       elsif user = User.find_by(fb_user_id: username)
         if user.fb_acress_token == password
           user
-        else
-          redirect_to('/')
         end
-      else
-        redirect_to('/')
       end
-    else
-      redirect_to('/')
     end
   end
 

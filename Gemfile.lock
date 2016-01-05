@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/rails-api/active_model_serializers.git
+  revision: 1e4eaa1562720528f3d8d42be8783658709581bc
+  branch: 0-9-stable
+  specs:
+    active_model_serializers (0.9.3)
+      activemodel (>= 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -20,8 +28,6 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    active_model_serializers (0.9.3)
-      activemodel (>= 3.2)
     activejob (4.2.4)
       activesupport (= 4.2.4)
       globalid (>= 0.3.0)
@@ -216,7 +222,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_model_serializers (~> 0.9.3)
+  active_model_serializers (~> 0.9.3)!
   byebug
   capistrano (~> 3.4.0)
   capistrano-bundler (~> 1.1.4)

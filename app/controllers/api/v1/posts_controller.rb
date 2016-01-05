@@ -2,7 +2,7 @@ class Api::V1::PostsController < Api::V1::BaseApiController
   before_action :require_post, only: [:followers, :follow, :unfollow]
 
   def index
-    @posts = Post.includes({user: [:profile_photo]}, :photos, :video).order("id DESC").to_a
+    @posts = Post.includes({user: [:profile_photo]}, :photos, :video, {top_comment: [:user]}, {top_emotion: [:user]}, :top_follower).order("id DESC").to_a
 
     render json: @posts, each_serializer: Api::V1::Posts::PostSerializer, current_user: @current_user
   end
@@ -26,10 +26,11 @@ class Api::V1::PostsController < Api::V1::BaseApiController
   end
 
   def create
-    if post = @current_user.add_new_post(create_post_params)
+    post = @current_user.add_new_post(create_post_params)
+    if post.valid?
       render json: {post_id: post.id}, status: :ok
     else
-      render json: {error: @current_user.errors.full_messages}, status: :unprocessable_entity
+      render json: {errors: post.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
@@ -39,6 +40,6 @@ class Api::V1::PostsController < Api::V1::BaseApiController
   end
 
   def create_post_params
-    params.require(:post).permit(:message, :latitude, :longitude)
+    params.require(:post).permit(:message, :latitude, :longitude, photos_attributes: [:file_key, meta_data: [:thumbnail_size, :normal_size]], video_attributes: [:file_key, meta_data: [:thumbnail_size, :duration]])
   end
 end

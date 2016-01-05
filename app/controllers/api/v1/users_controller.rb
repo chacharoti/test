@@ -72,14 +72,40 @@ class Api::V1::UsersController < Api::V1::BaseApiController
 
   def add_media
     media = @current_user.add_media(media_params)
+    for medium in media
+      unless medium.valid?
+        render json: {errors: medium.errors.full_messages}, status: :unprocessable_entity
+        return
+      end
+    end
 
-    render json: media, each_serializer: Api::V1::Posts::MediaSerializer, root: 'media'
+    render json: media, each_serializer: Api::V1::MediaSerializer, root: 'media'
   end
 
   def update_profile_photo
-    photo = @current_user.update_profile_photo(params[:profile_photo_file_key])
+    photo = @current_user.update_profile_photo(profile_photo_params)
 
-    render json: photo, serializer: Api::V1::Posts::MediaSerializer, root: 'photo'
+    if photo.valid?
+      render json: photo, serializer: Api::V1::MediaSerializer, root: 'photo'
+    else
+      render json: {errors: photo.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
+  def update_location
+    location = @current_user.update_location(update_location_params)
+
+    if location.valid?
+      render json: {location_id: location.id}, status: :ok
+    else
+      render json: {errors: location.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
+  def nearby
+    page = (params[:page] || 1).to_i
+    users = User.page(page).per(AppSetting.nearby_people_page_size).to_a
+    render json: users, each_serializer: Api::V1::Users::NearbySerializer, root: 'nearby'
   end
 
   private
@@ -88,7 +114,11 @@ class Api::V1::UsersController < Api::V1::BaseApiController
   end
 
   def media_params
-    params.permit(media: [:type, :file_key]).require(:media)
+    params.permit(media: [:type, :file_key, meta_data: [:thumbnail_size, :normal_size, :duration]]).require(:media)
+  end
+
+  def profile_photo_params
+    params.require(:profile_photo).permit(:file_key, meta_data: [:thumbnail_size, :normal_size])
   end
 
   def sign_up_with_strong_params strong_params
@@ -114,5 +144,9 @@ class Api::V1::UsersController < Api::V1::BaseApiController
     @emotion_types.map do |emotion_type|
       Api::V1::Posts::EmotionTypeSerializer.new(emotion_type, root: false)
     end
+  end
+
+  def update_location_params
+    params.require(:location).permit(:latitude, :longitude)
   end
 end
