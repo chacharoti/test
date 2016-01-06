@@ -26,11 +26,15 @@ class Post < ActiveRecord::Base
   end
 
   def self.latest_items
-    Post.includes({user: [:profile_photo]}, :photos, :video, {top_comment: [:user]}, {top_emotion: [:user]}, :top_follower).order("id DESC")
+    Post.includes({user: [:profile_photo]}, :photos, :video, {top_comment: [:user]}, {top_emotion: [:user]}, :top_follower).limit(AppSetting.posts_page_size).order("id DESC")
   end
 
-  def self.new_items latest_score
-    self.latest_items.where("id > #{latest_score}")
+  def self.new_items highest_score
+    self.latest_items.where("id > #{highest_score}")
+  end
+
+  def self.more_items lowest_score
+    self.latest_items.where("id < #{lowest_score}")
   end
 
   def add_comment user, params

@@ -6,9 +6,18 @@ class Api::V1::PostsController < Api::V1::BaseApiController
   end
 
   def load_new
-    latest_score = params[:latest_score].try(:to_i)
-    if latest_score.present? && latest_score > 0
-      render_posts(Post.new_items(latest_score).to_a)
+    highest_score = params[:highest_score].try(:to_i)
+    if highest_score.present? && highest_score > 0
+      render_posts(Post.new_items(highest_score).to_a)
+    else
+      render json: {error: 'Invalid score'}, status: :unprocessable_entity
+    end
+  end
+
+  def load_more
+    lowest_score = params[:lowest_score].try(:to_i)
+    if lowest_score.present? && lowest_score > 0
+      render_posts(Post.more_items(lowest_score).to_a)
     else
       render json: {error: 'Invalid score'}, status: :unprocessable_entity
     end

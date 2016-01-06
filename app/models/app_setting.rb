@@ -13,6 +13,10 @@ class AppSetting < ActiveRecord::Base
     AppSetting.find_by(key: "media_url").value
   end
 
+  def self.posts_page_size
+    AppSetting.find_by(key: "posts_page_size").value.to_i
+  end
+
   def self.nearby_people_page_size
     AppSetting.find_by(key: "nearby_people_page_size").value.to_i
   end

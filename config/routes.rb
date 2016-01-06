@@ -41,6 +41,7 @@ Rails.application.routes.draw do
         resources :posts, only: [:index, :create] do
           collection do
             get :load_new
+            get :load_more
           end
           member do
             resources :comments, only: [:index, :create]
