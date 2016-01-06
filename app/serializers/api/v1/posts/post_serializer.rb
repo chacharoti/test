@@ -1,5 +1,5 @@
 class Api::V1::Posts::PostSerializer < ActiveModel::Serializer
-  attributes :id, :latitude, :longitude, :message, :interactions_count, :emotions_count, :comments_count, :followers_count, :seen_users_count, :created_at, :added_emotion_already, :followed_already
+  attributes :id, :latitude, :longitude, :message, :score, :interactions_count, :emotions_count, :comments_count, :followers_count, :seen_users_count, :created_at, :added_emotion_already, :followed_already
 
   has_one :user, serializer: Api::V1::UserSerializer
   has_many :photos, serializer: Api::V1::MediaSerializer

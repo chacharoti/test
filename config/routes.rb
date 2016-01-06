@@ -39,6 +39,9 @@ Rails.application.routes.draw do
         end
 
         resources :posts, only: [:index, :create] do
+          collection do
+            get :load_new
+          end
           member do
             resources :comments, only: [:index, :create]
             resources :emotions, only: [:index, :create] do

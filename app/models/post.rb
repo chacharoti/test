@@ -21,6 +21,18 @@ class Post < ActiveRecord::Base
   has_one :top_post_user_follow, -> { order('created_at ASC') }, class_name: 'PostUserFollow'
   has_one :top_follower, through: :top_post_user_follow, source: :user
 
+  def score
+    self.id
+  end
+
+  def self.latest_items
+    Post.includes({user: [:profile_photo]}, :photos, :video, {top_comment: [:user]}, {top_emotion: [:user]}, :top_follower).order("id DESC")
+  end
+
+  def self.new_items latest_score
+    self.latest_items.where("id > #{latest_score}")
+  end
+
   def add_comment user, params
     self.comments.create(params.merge(user_id: user.id))
   end

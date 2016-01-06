@@ -2,9 +2,16 @@ class Api::V1::PostsController < Api::V1::BaseApiController
   before_action :require_post, only: [:followers, :follow, :unfollow]
 
   def index
-    @posts = Post.includes({user: [:profile_photo]}, :photos, :video, {top_comment: [:user]}, {top_emotion: [:user]}, :top_follower).order("id DESC").to_a
+    render_posts(Post.latest_items.to_a)
+  end
 
-    render json: @posts, each_serializer: Api::V1::Posts::PostSerializer, current_user: @current_user
+  def load_new
+    latest_score = params[:latest_score].try(:to_i)
+    if latest_score.present? && latest_score > 0
+      render_posts(Post.new_items(latest_score).to_a)
+    else
+      render json: {error: 'Invalid score'}, status: :unprocessable_entity
+    end
   end
 
   def followers
@@ -41,5 +48,9 @@ class Api::V1::PostsController < Api::V1::BaseApiController
 
   def create_post_params
     params.require(:post).permit(:message, :latitude, :longitude, photos_attributes: [:file_key, meta_data: [:thumbnail_size, :normal_size]], video_attributes: [:file_key, meta_data: [:thumbnail_size, :duration]])
+  end
+
+  def render_posts posts
+    render json: posts, each_serializer: Api::V1::Posts::PostSerializer, current_user: @current_user
   end
 end
