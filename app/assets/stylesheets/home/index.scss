@@ -1,10 +1,82 @@
 #landing_page {
   #welcome_to_milispace {
-    .welcome-container {
-      height: 100%;
+    background-image: url('../assets/landing_page/bg1.png');
+    background-position: center center;
+  }
+  .navbar {
+    margin-top: 30px;
+    min-height: 40px;
 
-      background-image: url('../assets/bg1.png');
-      background-position: center center;
+    #navbar-content {
+      padding-right: 0;
+    }
+
+    .navbar-brand{
+      padding: 0;
+      height: 40px;
+    }
+
+    .nav-item {
+      padding: 10px 20px;
+      color: #ffffff;
+      text-transform: uppercase;
+      border-radius: 25px;
+
+      -webkit-transition: all .1s ease-in-out;
+      -moz-transition: all .1s ease-in-out;
+      -o-transition: all .1s ease-in-out;
+      transition: all .1s ease-in-out;
+    }
+
+    .nav-item:hover {
+      background-color: #dbb10a;
     }
   }
+
+  .page-heading {
+    position: relative;
+    top: 50px;
+  }
+
+  .page-heading-content {
+    margin-top: 100px;
+    color: #ffffff;
+    h1 {
+      text-transform: uppercase;
+    }
+
+    .download-links {
+      position: relative;
+      top: 15px;
+    }
+
+    .link-to-download {
+      display: inline-block;
+      margin-right: 10px;
+      padding: 11px 22px;
+
+      color: #ffffff;
+      text-transform: uppercase;
+      text-decoration: none;
+
+      border: 1px solid white;
+      border-radius: 20px;
+
+      -webkit-transition: all .1s ease-in-out;
+      -moz-transition: all .1s ease-in-out;
+      -o-transition: all .1s ease-in-out;
+      transition: all .1s ease-in-out;
+
+      i {
+        margin-right: 15px;
+        font-size: 17px;
+      }
+    }
+
+    .link-to-download:hover {
+      background-color: #dbb10a;
+      border-color: #dbb10a;
+    }
+  }
+
 }

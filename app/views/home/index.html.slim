@@ -1,6 +1,35 @@
 #landing_page
   #welcome_to_milispace.section
-    .welcome-container.container-fluid
+    .container
+      nav.navbar
+        .container-fluid
+          .navbar-header
+            a.navbar-brand href="#{root_path}"
+              img src="assets/logo.png"
+          #navbar-content.collapse.navbar-collapse
+            ul.nav.navbar-nav.navbar-right
+              li
+                a.nav-item href="#"  Welcome
+              li
+                a.nav-item href="#"  Feature
+              li
+                a.nav-item href="#"  Download
+              li
+                a.nav-item href="#"  Contact
+      .row.page-heading
+        .page-heading-content.col-sm-6
+          h1 Welcome to Milispace
+          p You’ll see when your message is delivered to your friend’s phone,
+          p plus when they’ve seen it.
+          p.download-links
+            a.link-to-download href="#"
+              i.fa.fa-apple
+              | Appstore
+            a.link-to-download href="#"
+              i.fa.fa-android
+              | Android
+        .col-sm-5.col-sm-offset-1
+          img.img-responsive src="assets/landing_page/ip1.png"
   #see_nearly.section
     | 2
   #find_around.section
