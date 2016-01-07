@@ -30,11 +30,11 @@ class Post < ActiveRecord::Base
   end
 
   def self.new_items highest_score
-    self.latest_items.where("id > #{highest_score}")
+    self.latest_items.where("id > ?", highest_score)
   end
 
   def self.more_items lowest_score
-    self.latest_items.where("id < #{lowest_score}")
+    self.latest_items.where("id < ?", lowest_score)
   end
 
   def add_comment user, params
