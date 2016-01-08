@@ -16,5 +16,6 @@
 //= require bootstrap-sprockets
 
 //= require plugin/jquery.fullPage
+//= require plugin/wow
 
 //= require milispace.js
