@@ -7,7 +7,8 @@ var HomeIndexJs = {};
 			'css3': true,
 			'scrollingSpeed': 700,
 			'navigation': true,
-			'navigationPosition': 'right'
+			'navigationPosition': 'right',
+			'scrollBar': true
 		});
 	}
 } ());
