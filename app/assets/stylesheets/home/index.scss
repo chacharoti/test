@@ -2,81 +2,130 @@
   #welcome_to_milispace {
     background-image: url('../assets/landing_page/bg1.png');
     background-position: center center;
-  }
-  .navbar {
-    margin-top: 30px;
-    min-height: 40px;
 
-    #navbar-content {
-      padding-right: 0;
-    }
+    .navbar {
+      margin-top: 30px;
+      min-height: 40px;
 
-    .navbar-brand{
-      padding: 0;
-      height: 40px;
-    }
+      #navbar-content {
+        padding-right: 0;
+      }
 
-    .nav-item {
-      padding: 10px 20px;
-      color: #ffffff;
-      text-transform: uppercase;
-      border-radius: 25px;
+      .navbar-brand{
+        padding: 0;
+        height: 40px;
+      }
 
-      -webkit-transition: all .1s ease-in-out;
-      -moz-transition: all .1s ease-in-out;
-      -o-transition: all .1s ease-in-out;
-      transition: all .1s ease-in-out;
-    }
+      .nav-item {
+        padding: 10px 20px;
+        color: #ffffff;
+        text-transform: uppercase;
+        border-radius: 25px;
 
-    .nav-item:hover {
-      background-color: #dbb10a;
-    }
-  }
+        -webkit-transition: all .1s ease-in-out;
+        -moz-transition: all .1s ease-in-out;
+        -o-transition: all .1s ease-in-out;
+        transition: all .1s ease-in-out;
+      }
 
-  .page-heading {
-    position: relative;
-    top: 50px;
-  }
-
-  .page-heading-content {
-    margin-top: 100px;
-    color: #ffffff;
-    h1 {
-      text-transform: uppercase;
-    }
-
-    .download-links {
-      position: relative;
-      top: 15px;
-    }
-
-    .link-to-download {
-      display: inline-block;
-      margin-right: 10px;
-      padding: 11px 22px;
-
-      color: #ffffff;
-      text-transform: uppercase;
-      text-decoration: none;
-
-      border: 1px solid white;
-      border-radius: 20px;
-
-      -webkit-transition: all .1s ease-in-out;
-      -moz-transition: all .1s ease-in-out;
-      -o-transition: all .1s ease-in-out;
-      transition: all .1s ease-in-out;
-
-      i {
-        margin-right: 15px;
-        font-size: 17px;
+      .nav-item:hover {
+        background-color: #dbb10a;
       }
     }
 
-    .link-to-download:hover {
-      background-color: #dbb10a;
-      border-color: #dbb10a;
+    .page-heading {
+      position: relative;
+      top: 50px;
+    }
+
+    .page-heading-content {
+      margin-top: 100px;
+      color: #ffffff;
+      h1 {
+        text-transform: uppercase;
+      }
+
+      .download-links {
+        position: relative;
+        top: 15px;
+      }
+
+      .link-to-download {
+        display: inline-block;
+        margin-right: 10px;
+        padding: 11px 22px;
+
+        color: #ffffff;
+        text-transform: uppercase;
+        text-decoration: none;
+
+        border: 1px solid white;
+        border-radius: 20px;
+
+        -webkit-transition: all .1s ease-in-out;
+        -moz-transition: all .1s ease-in-out;
+        -o-transition: all .1s ease-in-out;
+        transition: all .1s ease-in-out;
+
+        i {
+          margin-right: 15px;
+          font-size: 17px;
+        }
+      }
+
+      .link-to-download:hover {
+        background-color: #dbb10a;
+        border-color: #dbb10a;
+      }
     }
   }
 
+  #see_nearly {
+    background-color: #f8f8f8;
+
+    .section-heading {
+      position: relative;
+      top: 200px;
+    }
+
+    h2 {
+      text-transform: uppercase;
+    }
+
+    .red-balloon {
+      position: absolute;
+      top: -200px;
+      left: -100px;
+
+      img {
+        width: 75%;
+      }
+    }
+
+    .blue-balloon {
+      position: absolute;
+      right: 10px;
+      top: 0;
+    }
+
+    .big-cloud {
+      position: absolute;
+      top: 0;
+      left: -200px;
+
+      img {
+        width: 75%;
+      }
+    }
+
+    .small-cloud {
+      position: absolute;
+      top: -100px;
+      right: 50px;
+
+      img {
+        width: 75%;
+      }
+    }
+  }
 }
