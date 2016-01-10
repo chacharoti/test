@@ -264,6 +264,62 @@
 
   }
 
+  #history {
+    background-color: #f8f8f8;
+
+    .section-heading {
+      position: relative;
+      top: 250px;
+    }
+
+    .label-tag {
+      background-color: #c8c8c8;
+    }
+
+    p {
+      color: #666666;
+    }
+
+    .red-balloon {
+      position: absolute;
+      top: -200px;
+      left: -100px;
+
+      img {
+        width: 75%;
+      }
+    }
+
+    .blue-balloon {
+      position: absolute;
+      right: 10px;
+      top: 0;
+    }
+
+    .big-plane {
+      position: absolute;
+      top: -27%;
+      left: 7%;
+    }
+
+    .small-plane {
+      position: absolute;
+      top: 50%;
+    }
+
+    .big-group-cloud {
+      position: absolute;
+      top: -11%;
+      left: 7%;
+    }
+
+    .small-group-cloud {
+      position: absolute;
+      top: 64%;
+      left: 0%;
+    }
+  }
+
   .label-tag {
     padding: 5px 10px;
     letter-spacing: 4px;
