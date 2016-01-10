@@ -1,6 +1,7 @@
 #landing_page {
   #welcome_to_milispace {
     background-image: url('../assets/landing_page/bg1.png');
+    background-size: cover;
     background-position: center center;
 
     .navbar {
@@ -9,6 +10,8 @@
 
       #navbar-content {
         padding-right: 0;
+        font-weight: bold;
+        letter-spacing: 2px;
       }
 
       .navbar-brand{
@@ -42,7 +45,13 @@
       margin-top: 100px;
       color: #ffffff;
       h1 {
+        font-weight: bold;
+        letter-spacing: 5px;
         text-transform: uppercase;
+      }
+
+      p {
+        letter-spacing: 1px;
       }
 
       .download-links {
@@ -56,6 +65,8 @@
         padding: 11px 22px;
 
         color: #ffffff;
+        font-weight: bold;
+        letter-spacing: 1px;
         text-transform: uppercase;
         text-decoration: none;
 
@@ -68,8 +79,10 @@
         transition: all .1s ease-in-out;
 
         i {
+          position: relative;
+          bottom: -1px;
           margin-right: 15px;
-          font-size: 17px;
+          font-size: 24px;
         }
       }
 
