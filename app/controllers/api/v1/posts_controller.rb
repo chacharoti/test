@@ -23,24 +23,6 @@ class Api::V1::PostsController < Api::V1::BaseApiController
     end
   end
 
-  def followers
-    @followers = @post.followers.includes(:profile_photo)
-
-    render json: @followers, each_serializer: Api::V1::UserSerializer, root: 'followers'
-  end
-
-  def follow
-    @post.followed_by(@current_user, follow_params)
-
-    render json: {success: true}, status: :ok
-  end
-
-  def unfollow
-    @post.unfollowed_by(@current_user)
-
-    render json: {success: true}, status: :ok
-  end
-
   def create
     post = @current_user.add_new_post(create_post_params)
     if post.valid?
@@ -50,13 +32,34 @@ class Api::V1::PostsController < Api::V1::BaseApiController
     end
   end
 
-  private
-  def follow_params
-    params.require(:follow).permit(:latitude, :longitude)
+  def followers
+    @followers = @post.followers.includes(:profile_photo)
+
+    render json: @followers, each_serializer: Api::V1::UserSerializer, root: 'followers'
   end
 
+  def follow
+    follow = @post.followed_by(@current_user)
+
+    if follow == nil
+      render json: {success: false, error: 'Already followed'}, status: :unprocessable_entity
+    elsif follow.valid? == false
+      render json: {success: false, errors: follow.errors.full_messages}, status: :unprocessable_entity
+    else
+      render json: {success: true}, status: :ok
+    end
+  end
+
+  def unfollow
+    @post.unfollowed_by(@current_user)
+
+    render json: {success: true}, status: :ok
+  end
+
+  private
   def create_post_params
-    params.require(:post).permit(:message, :latitude, :longitude, photos_attributes: [:file_key, meta_data: [:thumbnail_size, :normal_size]], video_attributes: [:file_key, meta_data: [:thumbnail_size, :duration]])
+    params.require(:post).require(:message)
+    params.require(:post).permit(:message, photos_attributes: [:file_key, meta_data: [:thumbnail_size, :normal_size]], video_attributes: [:file_key, meta_data: [:thumbnail_size, :duration]])
   end
 
   def render_posts posts

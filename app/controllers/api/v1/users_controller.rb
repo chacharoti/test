@@ -147,6 +147,8 @@ class Api::V1::UsersController < Api::V1::BaseApiController
   end
 
   def update_location_params
+    params.require(:location).require(:latitude)
+    params.require(:location).require(:longitude)
     params.require(:location).permit(:latitude, :longitude)
   end
 end
