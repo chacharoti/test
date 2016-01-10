@@ -34,7 +34,14 @@
   #see_nearly.section
     .container
       .section-heading.row
-        .col-sm-5.col-sm-offset-1
+        .col-xs-12.hidden-md.hidden-lg
+          span.label.label-tag Hot
+          h2 See what’s Hot nearby
+          p Reach people instantly. You’ll see when your message is
+          p delivered to your friend’s phone, plus when they’ve
+          p seen it. This way, you can be sure your messages are
+          p going through like they’re supposed to.
+        .col-md-5.col-md-offset-1
           .wow.bounceInLeft data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="10"
             img.img-responsive src="assets/landing_page/ip2.png"
           .red-balloon.wow.fadeInUp data-wow-duration="2s" data-wow-delay="1s" data-wow-offset="10"
@@ -45,15 +52,28 @@
             img.img-responsive src="assets/landing_page/cloud1.png"
           .big-cloud.wow.fadeInUp data-wow-duration="2s" data-wow-delay="1.5s" data-wow-offset="10"
             img.img-responsive src="assets/landing_page/cloud1.png"
-        .col-sm-5.col-sm-offset-1
-          span.label.label-default Hot
+        .col-md-5.col-md-offset-1.hidden-xs.hidden-sm
+          span.label.label-tag Hot
           h2 See what’s Hot nearby
           p Reach people instantly. You’ll see when your message is
           p delivered to your friend’s phone, plus when they’ve
           p seen it. This way, you can be sure your messages are
           p going through like they’re supposed to.
   #find_around.section
-    |5
+    .container
+      .section-heading.row
+        .col-sm-6
+          span.label.label-tag People
+          h2 Find people around you
+          p Reach people instantly. You’ll see when your message is
+          p delivered to your friend’s phone, plus when they’ve seen it. This
+          p way, you can be sure your messages are going through like
+          p they’re supposed to.
+        .col-sm-6
+          .earth-map.wow.bounceInLeft data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="10"
+            img.img-responsive src="assets/landing_page/earth-map.png"
+          .iphone-find-around.wow.bounceInLeft data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="10"
+            img.img-responsive src="assets/landing_page/ip3.png"
   #chatting.section
     | 4
   #follow.section

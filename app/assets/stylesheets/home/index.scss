@@ -99,15 +99,7 @@
 
     .section-heading {
       position: relative;
-      top: 200px;
-    }
-
-    .label-default {
-      padding: 5px 10px;
-      letter-spacing: 2px;
-      background-color: #c8c8c8;
-      border-radius: 20px;
-      text-transform: uppercase;
+      top: 250px;
     }
 
     h2 {
@@ -159,5 +151,52 @@
         width: 75%;
       }
     }
+  }
+
+  #find_around {
+    .section-heading {
+      position: relative;
+      top: 250px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      margin-top: 15px;
+      font-weight: bold;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    p {
+      margin-bottom: 5px;
+      color: #666666;
+      letter-spacing: 1.5px;
+    }
+
+    .earth-map {
+      position: absolute;
+      width: 120%;
+      left: -22%;
+      top: -108px;
+    }
+
+    .iphone-find-around {
+      position: relative;
+      top: -75px;
+
+      img {
+        width: 55%;
+        position: relative;
+        left: 17%;
+      }
+    }
+  }
+
+  .label-tag {
+    padding: 5px 10px;
+    letter-spacing: 2px;
+    background-color: #c8c8c8;
+    border-radius: 20px;
+    text-transform: uppercase;
   }
 }
