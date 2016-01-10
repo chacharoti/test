@@ -21,3 +21,12 @@
 @import "plugin/animate";
 
 @import "home/index";
+
+@font-face {
+  font-family: sfUiDisplayFont;
+  src: url(/assets/web-fonts/SF-UI-Display-Light.otf);
+}
+
+body {
+  font-family: sfUiDisplayFont;
+}
