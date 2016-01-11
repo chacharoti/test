@@ -13,6 +13,10 @@ class User < ActiveRecord::Base
   has_many :locations, class_name: 'UserLocation', dependent: :destroy
   belongs_to :current_location, class_name: 'UserLocation'
   has_many :activities, foreign_key: 'to_user_id', dependent: :destroy
+  has_many :conversation_users, dependent: :destroy
+  has_many :conversations, through: :conversation_users
+  has_many :joining_conversation_users, -> { joining }, class_name: 'ConversationUser'
+  has_many :joining_conversations, through: :joining_conversation_users, source: :conversation
 
   before_create :downcase_email
 
@@ -64,5 +68,9 @@ class User < ActiveRecord::Base
 
   def recent_activities page
     self.activities.includes(:from_user).where('deleted != 1').order('id DESC').page(page).per(AppSetting.activities_page_size)
+  end
+
+  def recent_conversations
+    self.joining_conversations.includes(:joining_users).order('conversation_users.id DESC')
   end
 end
