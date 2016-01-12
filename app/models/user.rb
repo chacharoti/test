@@ -71,6 +71,6 @@ class User < ActiveRecord::Base
   end
 
   def recent_conversations
-    self.joining_conversations.includes(:joining_users).order('conversation_users.id DESC')
+    self.joining_conversations.includes(:joining_users, :top_message).order('messages.created_at DESC, conversations.id DESC')
   end
 end
