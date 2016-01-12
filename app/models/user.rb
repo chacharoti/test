@@ -71,6 +71,10 @@ class User < ActiveRecord::Base
   end
 
   def recent_conversations
-    self.joining_conversations.includes(:joining_users, :top_message).order('messages.created_at DESC, conversations.id DESC')
+    self.joining_conversations.includes(:joining_users, :top_message).order('conversations.updated_at DESC, conversations.id DESC').limit(AppSetting.inbox_page_size)
+  end
+
+  def more_conversations last_conversation_updated_at
+    self.recent_conversations.where('conversations.updated_at < ?', last_conversation_updated_at)
   end
 end

@@ -63,6 +63,9 @@ Rails.application.routes.draw do
         end
 
         resources :conversations, only: [:index] do
+          collection do
+            get :load_more
+          end
         end
       end
     end

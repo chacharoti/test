@@ -1,5 +1,5 @@
 class Message < ActiveRecord::Base
-  belongs_to :conversation
+  belongs_to :conversation, touch: true
   belongs_to :user
   belongs_to :content, polymorphic: true
   scope :available, -> { where('deleted_at IS NULL') }
