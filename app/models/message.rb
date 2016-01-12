@@ -5,6 +5,12 @@ class Message < ActiveRecord::Base
   scope :available, -> { where('deleted_at IS NULL') }
   scope :sorted, -> { order('created_at DESC') }
 
+  rails_admin do
+    include_all_fields
+    field :content_type
+    field :content_id
+  end
+
   def content_summary
     "This is a message id##{self.id}, will be changed later"
   end

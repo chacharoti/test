@@ -35,4 +35,11 @@ class Api::V1::BaseApiController < ActionController::Base
       render nothing: true, status: :unprocessable_entity
     end
   end
+
+  def require_conversation
+    conversation_id = params[:id] || params[:conversation_id]
+    unless @conversation = Conversation.find_by(id: conversation_id)
+      render nothing: true, status: :unprocessable_entity
+    end
+  end
 end

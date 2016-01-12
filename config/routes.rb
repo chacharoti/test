@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   else
     api_subdomain = 'api'
     admin_subdomain = 'admin'
-    web_subdomain = ''
+    web_subdomain = 'staging'
   end
 
   constraints subdomain: admin_subdomain do
@@ -68,6 +68,10 @@ Rails.application.routes.draw do
           collection do
             get :load_more
             get :load_new
+          end
+          member do
+            resources :messages, only: [:index] do
+            end
           end
         end
       end

@@ -26,6 +26,6 @@ class Api::V1::ConversationsController < Api::V1::BaseApiController
 
   private
   def render_conversations conversations
-    render json: conversations, each_serializer: Api::V1::Conversations::ConversationSerializer, current_user: @current_user
+    render json: conversations, each_serializer: Api::V1::Conversations::ConversationSerializer
   end
 end

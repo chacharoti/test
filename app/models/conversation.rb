@@ -14,4 +14,8 @@ class Conversation < ActiveRecord::Base
   def top_message_created_at
     self.top_message.try(:created_at)
   end
+
+  def all_sorted_messages
+    self.sorted_messages.includes(:user)
+  end
 end
