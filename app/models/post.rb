@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
   belongs_to :user
+  belongs_to :location, class_name: 'UserLocation'
 
   has_many :photos, -> { uniq }, as: :owner
   accepts_nested_attributes_for :photos
@@ -21,13 +22,31 @@ class Post < ActiveRecord::Base
   has_one :top_post_user_follow, -> { order('created_at ASC') }, class_name: 'PostUserFollow'
   has_one :top_follower, through: :top_post_user_follow, source: :user
 
-  def add_comment user, params
-    self.comments.create(params.merge(user_id: user.id))
+  def score
+    self.id
   end
 
-  def followed_by user, params
+  def self.latest_items
+    Post.includes({user: [:profile_photo]}, :location, :photos, :video, {top_comment: [:user]}, {top_emotion: [:user]}, :top_follower).limit(AppSetting.posts_page_size).order("id DESC")
+  end
+
+  def self.new_items highest_score
+    self.latest_items.where("id > ?", highest_score)
+  end
+
+  def self.more_items lowest_score
+    self.latest_items.where("id < ?", lowest_score)
+  end
+
+  def add_comment user, params
+    self.comments.create(params.merge(user_id: user.id, location_id: user.current_location_id))
+  end
+
+  def followed_by user
     if self.post_user_follows.where(user_id: user.id).count == 0
-      self.post_user_follows.create(params.merge(user_id: user.id))
+      self.post_user_follows.create(user_id: user.id, location_id: user.current_location_id)
+    else
+      nil
     end
   end
 
@@ -37,7 +56,9 @@ class Post < ActiveRecord::Base
 
   def add_emotion user, emotion_params
     if self.emotions.where(user_id: user.id).count == 0
-      self.emotions.create(user_id: user.id, emotion_type_id: emotion_params[:emotion_type_id])
+      self.emotions.create(emotion_params.merge(user_id: user.id, location_id: user.current_location_id))
+    else
+      return nil
     end
   end
 
@@ -51,5 +72,21 @@ class Post < ActiveRecord::Base
 
   def followed_already_by user
     self.post_user_follows.exists?(user_id: user.id)
+  end
+
+  def all_emotions
+    self.emotions.includes([:emotion_type, :location, {user: [:profile_photo]}])
+  end
+
+  def all_comments
+    self.comments.includes([:location, {user: [:profile_photo]}])
+  end
+
+  def latitude
+    self.location.try(:latitude)
+  end
+
+  def longitude
+    self.location.try(:longitude)
   end
 end

@@ -2,9 +2,9 @@ class Api::V1::CommentsController < Api::V1::BaseApiController
   before_action :require_post, only: [:index, :create]
 
   def index
-    @comments = @post.comments.includes([user: [:profile_photo]])
+    comments = @post.all_comments
 
-    render json: @comments, each_serializer: Api::V1::Posts::CommentSerializer
+    render json: comments, each_serializer: Api::V1::Posts::CommentSerializer
   end
 
   def create
@@ -17,6 +17,7 @@ class Api::V1::CommentsController < Api::V1::BaseApiController
 
   private
   def comment_params
-    params.require(:comment).permit(:latitude, :longitude, :message)
+    params.require(:comment).require(:message)
+    params.require(:comment).permit(:message)
   end
 end

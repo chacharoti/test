@@ -11,10 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151229145841) do
+ActiveRecord::Schema.define(version: 20160111162734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.integer  "from_user_id"
+    t.integer  "to_user_id"
+    t.string   "type"
+    t.integer  "seen",          default: 0, null: false
+    t.integer  "read",          default: 0, null: false
+    t.integer  "deleted",       default: 0, null: false
+    t.string   "message"
+    t.integer  "connection_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "activities", ["from_user_id", "to_user_id"], name: "index_activities_on_from_user_id_and_to_user_id", using: :btree
 
   create_table "app_settings", force: :cascade do |t|
     t.string   "key"
@@ -28,14 +43,28 @@ ActiveRecord::Schema.define(version: 20151229145841) do
     t.string   "message"
     t.integer  "post_id"
     t.integer  "user_id"
-    t.float    "latitude"
-    t.float    "longitude"
     t.integer  "user_likes_count", default: 0, null: false
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.integer  "location_id"
   end
 
   add_index "comment_post_users", ["post_id"], name: "index_comment_post_users_on_post_id", using: :btree
+
+  create_table "conversation_users", force: :cascade do |t|
+    t.integer  "conversation_id"
+    t.integer  "user_id"
+    t.string   "status"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "conversation_users", ["conversation_id", "user_id"], name: "index_conversation_users_on_conversation_id_and_user_id", using: :btree
+
+  create_table "conversations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "devices", force: :cascade do |t|
     t.string   "push_notification_token"
@@ -56,11 +85,10 @@ ActiveRecord::Schema.define(version: 20151229145841) do
     t.integer  "emotion_type_id"
     t.integer  "post_id"
     t.integer  "user_id"
-    t.float    "latitude"
-    t.float    "longitude"
     t.integer  "user_likes_count", default: 0, null: false
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.integer  "location_id"
   end
 
   add_index "emotion_post_users", ["post_id"], name: "index_emotion_post_users_on_post_id", using: :btree
@@ -82,6 +110,20 @@ ActiveRecord::Schema.define(version: 20151229145841) do
   end
 
   add_index "media", ["owner_type", "owner_id"], name: "media_indexes", using: :btree
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "conversation_id"
+    t.integer  "user_id"
+    t.datetime "editted_at"
+    t.datetime "deleted_at"
+    t.string   "status"
+    t.integer  "content_id"
+    t.string   "content_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer  "resource_owner_id", null: false
@@ -135,10 +177,9 @@ ActiveRecord::Schema.define(version: 20151229145841) do
   create_table "post_user_follows", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.float    "latitude"
-    t.float    "longitude"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "location_id"
   end
 
   add_index "post_user_follows", ["post_id"], name: "index_post_user_follows_on_post_id", using: :btree
@@ -156,8 +197,6 @@ ActiveRecord::Schema.define(version: 20151229145841) do
 
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id"
-    t.float    "latitude"
-    t.float    "longitude"
     t.string   "message"
     t.integer  "emotions_count",   default: 0, null: false
     t.integer  "comments_count",   default: 0, null: false
@@ -165,6 +204,7 @@ ActiveRecord::Schema.define(version: 20151229145841) do
     t.integer  "seen_users_count", default: 0, null: false
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.integer  "location_id"
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
@@ -198,6 +238,7 @@ ActiveRecord::Schema.define(version: 20151229145841) do
     t.string   "phone_number"
     t.string   "fb_user_id"
     t.string   "fb_access_token"
+    t.integer  "current_location_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

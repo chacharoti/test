@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  from_user_id: 1
+  to_user_id: 1
+  type: 
+  seen: 1
+  read: 1
+  deleted: 1
+  connection_id: 1
+
+two:
+  from_user_id: 1
+  to_user_id: 1
+  type: 
+  seen: 1
+  read: 1
+  deleted: 1
+  connection_id: 1

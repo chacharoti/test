@@ -1,0 +1,2 @@
+class AskForPrivateChatActivity < Activity
+end

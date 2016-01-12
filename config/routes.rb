@@ -41,6 +41,10 @@ Rails.application.routes.draw do
         end
 
         resources :posts, only: [:index, :create] do
+          collection do
+            get :load_new
+            get :load_more
+          end
           member do
             resources :comments, only: [:index, :create]
             resources :emotions, only: [:index, :create] do
@@ -55,6 +59,16 @@ Rails.application.routes.draw do
         end
 
         resources :packets, only: [:index] do
+        end
+
+        resources :activities, only: [:index] do
+        end
+
+        resources :conversations, only: [:index] do
+          collection do
+            get :load_more
+            get :load_new
+          end
         end
       end
     end

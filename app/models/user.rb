@@ -11,6 +11,18 @@ class User < ActiveRecord::Base
   has_many :top_photos, -> { order("id DESC").limit(5) }, class_name: "Photo", as: :owner
   has_many :posts, dependent: :destroy
   has_many :locations, class_name: 'UserLocation', dependent: :destroy
+  belongs_to :current_location, class_name: 'UserLocation'
+  has_many :activities, foreign_key: 'to_user_id', dependent: :destroy
+  has_many :conversation_users, dependent: :destroy
+  has_many :conversations, through: :conversation_users
+  has_many :joining_conversation_users, -> { joining }, class_name: 'ConversationUser'
+  has_many :joining_conversations, through: :joining_conversation_users, source: :conversation
+
+  before_create :downcase_email
+
+  def downcase_email
+    self.email.downcase
+  end
 
   def unique_identifier
     Digest::SHA1.hexdigest(self.id.to_s + ENV['HASH_SALT'])
@@ -36,26 +48,37 @@ class User < ActiveRecord::Base
   end
 
   def add_new_post params
-    self.posts.create(params)
+    self.posts.create(params.merge(location_id: self.current_location_id))
   end
 
   def update_location params
-    self.locations.create(params)
-  end
-
-  def current_location
-    self.locations.order(:id).last
+    location = self.locations.create(params)
+    self.current_location = location
+    self.save
+    location
   end
 
   def latitude
-    if location = self.current_location
-      location.latitude
-    end
+    self.current_location.try(:latitude)
   end
 
   def longitude
-    if location = self.current_location
-      location.longitude
-    end
+    self.current_location.try(:longitude)
+  end
+
+  def recent_activities page
+    self.activities.includes(:from_user).where('deleted != 1').order('id DESC').page(page).per(AppSetting.activities_page_size)
+  end
+
+  def recent_conversations
+    self.joining_conversations.includes(:joining_users, :top_message).order('conversations.updated_at DESC, conversations.id DESC').limit(AppSetting.inbox_page_size)
+  end
+
+  def more_conversations last_conversation_updated_at
+    self.recent_conversations.where('conversations.updated_at < ?', last_conversation_updated_at)
+  end
+
+  def new_conversations first_conversation_updated_at
+    self.recent_conversations.where('conversations.updated_at > ?', first_conversation_updated_at)
   end
 end
