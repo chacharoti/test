@@ -65,6 +65,7 @@ Rails.application.routes.draw do
         resources :conversations, only: [:index] do
           collection do
             get :load_more
+            get :load_new
           end
         end
       end

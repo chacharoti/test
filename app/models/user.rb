@@ -77,4 +77,8 @@ class User < ActiveRecord::Base
   def more_conversations last_conversation_updated_at
     self.recent_conversations.where('conversations.updated_at < ?', last_conversation_updated_at)
   end
+
+  def new_conversations first_conversation_updated_at
+    self.recent_conversations.where('conversations.updated_at > ?', first_conversation_updated_at)
+  end
 end
