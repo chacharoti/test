@@ -2,12 +2,14 @@ Rails.application.routes.draw do
   devise_for :users
   use_doorkeeper
 
-  if Rails.env == 'staging'
+  if Rails.env.staging?
     api_subdomain = 'stagingapi'
     admin_subdomain = 'stagingadmin'
+    web_subdomain = 'staging'
   else
     api_subdomain = 'api'
     admin_subdomain = 'admin'
+    web_subdomain = ''
   end
 
   constraints subdomain: admin_subdomain do
@@ -62,7 +64,9 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'home#index'
+  constraints subdomain: web_subdomain do
+    root 'home#index'
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
