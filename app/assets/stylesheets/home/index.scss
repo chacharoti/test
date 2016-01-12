@@ -320,6 +320,87 @@
     }
   }
 
+  #download {
+    .section-heading {
+      position: relative;
+      top: 150px;
+    }
+
+    .main-content {
+      text-align: center;
+    }
+
+    input {
+      padding: 10px 20px;
+      width: 80%;
+      margin: 10px 0;
+    }
+
+    .download-links {
+      position: relative;
+      top: 15px;
+    }
+
+    .link-to-download {
+      display: inline-block;
+      margin-right: 10px;
+      padding: 8px 22px;
+
+      color: #1fb287;
+      font-weight: bold;
+      letter-spacing: 1px;
+      line-height: 30px;
+      text-transform: uppercase;
+      text-decoration: none;
+
+      border: 1px solid #6bccb0;
+      border-radius: 20px;
+
+      -webkit-transition: all .1s ease-in-out;
+      -moz-transition: all .1s ease-in-out;
+      -o-transition: all .1s ease-in-out;
+      transition: all .1s ease-in-out;
+
+      i {
+        position: relative;
+        bottom: -2px;
+        margin-right: 15px;
+        font-size: 24px;
+      }
+    }
+
+    .link-to-download:hover {
+      background-color: #1fb287;
+      border-color: #6bccb0;
+      color: white;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      text-align: center;
+      color: #a3a3a3;
+      background-color: #f9f9f9;
+
+
+      i {
+        margin: 0 15px;
+      }
+
+      p {
+        margin: 15px;
+      }
+
+      a {
+        margin: 0 5px;
+        color: #666666;
+      }
+    }
+  }
+
   .label-tag {
     padding: 5px 10px;
     letter-spacing: 4px;
