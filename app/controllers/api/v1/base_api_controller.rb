@@ -42,4 +42,8 @@ class Api::V1::BaseApiController < ActionController::Base
       render nothing: true, status: :unprocessable_entity
     end
   end
+
+  def raise_invalid_params
+    render json: {error: 'Invalid params'}, status: :unprocessable_entity
+  end
 end

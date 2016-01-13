@@ -3,7 +3,7 @@ class Message < ActiveRecord::Base
   belongs_to :user
   belongs_to :content, polymorphic: true
   scope :available, -> { where('deleted_at IS NULL') }
-  scope :sorted, -> { order('created_at DESC') }
+  scope :sorted, -> { order('id DESC') }
 
   rails_admin do
     include_all_fields

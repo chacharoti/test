@@ -10,7 +10,7 @@ class Api::V1::ConversationsController < Api::V1::BaseApiController
       conversations = @current_user.more_conversations(last_conversation_updated_at)
       render_conversations(conversations)
     else
-      render json: {error: 'Invalid params'}, status: :unprocessable_entity
+      raise_invalid_params
     end
   end
 
@@ -20,7 +20,7 @@ class Api::V1::ConversationsController < Api::V1::BaseApiController
       conversations = @current_user.new_conversations(first_conversation_updated_at)
       render_conversations(conversations)
     else
-      render json: {error: 'Invalid params'}, status: :unprocessable_entity
+      raise_invalid_params
     end
   end
 

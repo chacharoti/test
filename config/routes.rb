@@ -71,6 +71,9 @@ Rails.application.routes.draw do
           end
           member do
             resources :messages, only: [:index] do
+              collection do
+                get :load_more
+              end
             end
           end
         end
