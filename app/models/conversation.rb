@@ -22,4 +22,8 @@ class Conversation < ActiveRecord::Base
   def more_sorted_messages last_message_id
     self.recent_sorted_messages.where('messages.id < ?', last_message_id)
   end
+
+  def add_message message_params, user
+    self.messages.create(message_params.merge(user_id: user.id))
+  end
 end

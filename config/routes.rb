@@ -70,7 +70,7 @@ Rails.application.routes.draw do
             get :load_new
           end
           member do
-            resources :messages, only: [:index] do
+            resources :messages, only: [:index, :create] do
               collection do
                 get :load_more
               end
