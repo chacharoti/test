@@ -16,7 +16,7 @@ class Conversation < ActiveRecord::Base
   end
 
   def recent_sorted_messages
-    self.sorted_messages.includes(:user)
+    self.sorted_messages.includes(:user, :text, :photo, :video)
   end
 
   def more_sorted_messages last_message_id
