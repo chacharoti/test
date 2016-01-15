@@ -25,7 +25,6 @@
         }
       }
 
-
     }
 
     #see_nearly {
@@ -53,9 +52,46 @@
           margin: auto;
         }
       }
+    }
 
+    #find_around {
+      .section-heading {
+        top: 100px;
+        margin-top: 0;
+      }
 
+      h2 {
+        font-size: 22px;
+      }
+
+      .images {
+        top: 50px;
+      }
+    }
+
+    #chatting {
+      .section-heading {
+        top: 100px;
+        margin-top: 0;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+    }
+
+    #follow {
+      .section-heading {
+        top: 100px;
+        margin-top: 0;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+    }
+    .gradient-section {
+      visibility: inherit;
     }
   }
-
 }
