@@ -4,9 +4,9 @@ class Message < ActiveRecord::Base
   has_one :text, as: :owner
   has_one :photo, as: :owner
   has_one :video, as: :owner
+  has_one :audio, as: :owner
 
   attr_accessor :content_type
-  CONTENT_TYPES = %w(Text Photo Video)
 
   scope :available, -> { where('deleted_at IS NULL') }
   scope :sorted, -> { order('id DESC') }
@@ -22,6 +22,8 @@ class Message < ActiveRecord::Base
       self.create_photo(attributes)
     elsif self.content_type == 'Video'
       self.create_video(attributes)
+    elsif self.content_type == 'Audio'
+      self.create_audio(attributes)
     else
       raise "Unknown content_type: #{self.content_type}"
     end

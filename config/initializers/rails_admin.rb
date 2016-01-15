@@ -53,6 +53,16 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'Audio' do
+    configure :audio_url do
+      pretty_value do
+        object = bindings[:object]
+        %{<a target="_blank" href=#{object.audio_url}>#{object.file_key}</a >}.html_safe
+      end
+      read_only true # won't be editable in forms (alternatively, hide it in edit section)
+    end
+  end
+
   ### Popular gems integration
 
   ## == Devise ==

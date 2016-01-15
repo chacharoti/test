@@ -54,6 +54,10 @@ class Api::V1::MessagesController < Api::V1::BaseApiController
       params.require(:message).require(:content_attributes).require(:meta_data).require(:thumbnail_size)
       params.require(:message).require(:content_attributes).require(:meta_data).require(:duration)
       return params.require(:message).permit(:content_type, content_attributes: [:file_key, meta_data: [:thumbnail_size, :duration]])
+    elsif content_type == 'Audio'
+      params.require(:message).require(:content_attributes).require(:file_key)
+      params.require(:message).require(:content_attributes).require(:meta_data).require(:duration)
+      return params.require(:message).permit(:content_type, content_attributes: [:file_key, meta_data: [:duration]])
     else
       raise_invalid_params
     end
