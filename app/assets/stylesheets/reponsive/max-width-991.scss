@@ -1,0 +1,56 @@
+@media (max-width: 991px) {
+  #landing_page {
+    #welcome_to_milispace {
+      .page-heading-content {
+        text-align: center;
+      }
+
+      .main-images {
+        top: 50px;
+        img {
+          margin: auto;
+        }
+      }
+    }
+
+    #see_nearly {
+      .section-heading {
+        text-align: center;
+      }
+
+      .images {
+        display: inline-block;
+        top: 100px;
+      }
+
+      .main-image {
+        margin: auto;
+      }
+
+      .red-balloon {
+        top: -25%;
+        left: 5%;
+      }
+
+      .blue-balloon {
+        right: -10%;
+        top: 15%;
+      }
+
+      .small-cloud {
+        top: 0;
+        right: 0;
+      }
+
+      .big-cloud {
+        top: 40%;
+        left: -10%;
+      }
+    }
+  }
+
+  #fp-nav {
+    display: none;
+  }
+
+}
