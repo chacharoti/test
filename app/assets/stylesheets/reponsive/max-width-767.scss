@@ -92,6 +92,11 @@
 
       .paper-plane {
         top: -75%;
+        img {
+          transform: scale(1, 1);
+          -ms-transform: scale(1, 1);
+          -webkit-transform: scale(1, 1);
+        }
       }
 
       .small-cloud {
@@ -108,6 +113,34 @@
         left: 10%;
       }
     }
+
+    #history {
+      .section-heading {
+        top: 100px;
+        margin-top: 0;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+    }
+
+    #download {
+      .section-heading {
+        top: 100px;
+        margin-top: 0;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
+      .link-to-download {
+        padding: 5px 10px;
+        font-size: 12px;
+      }
+    }
+
     .gradient-section {
       visibility: inherit;
     }

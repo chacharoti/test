@@ -304,6 +304,11 @@
       top: 250px;
     }
 
+    .main-content {
+      position: relative;
+      z-index: 2;
+    }
+
     .label-tag {
       background-color: #c8c8c8;
     }
@@ -349,6 +354,10 @@
       position: absolute;
       top: 64%;
       left: 0%;
+    }
+
+    .gradient-section {
+      background: linear-gradient(rgba(248,248,248,0.01),rgba(248, 248, 248, 0.4), rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8), white, white);
     }
   }
 

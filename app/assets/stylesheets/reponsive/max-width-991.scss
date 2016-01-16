@@ -102,6 +102,8 @@
         top: 35%;
         img {
           transform: scale(1.5, 1.5);
+          -ms-transform: scale(1.5, 1.5);
+          -webkit-transform: scale(1.5, 1.5);
         }
       }
 
@@ -112,6 +114,18 @@
       .big-cloud {
         top: -70%;
       }
+    }
+
+    #history {
+      .section-heading {
+        text-align: center;
+      }
+
+      .images {
+        display: inline-block;
+        top: 150px;
+      }
+
     }
   }
 
