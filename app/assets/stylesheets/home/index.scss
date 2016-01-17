@@ -29,7 +29,7 @@
     .nav-item:hover {
       background-color: #dbb10a;
     }
-    
+
     -webkit-transition: all .7s ease-in-out;
     -moz-transition: all .7s ease-in-out;
     -o-transition: all .7s ease-in-out;
@@ -37,15 +37,209 @@
   }
 
   #main-nav.fix-menu {
-    background-color: #1FB287;
     padding: 10px;
     margin-top: 0;
+    background-color: #1fb287;
     z-index: 3;
 
     -webkit-transition: all .7s ease-in-out;
     -moz-transition: all .7s ease-in-out;
     -o-transition: all .7s ease-in-out;
     transition: all .7s ease-in-out;
+  }
+
+  #mobile-menu {
+    padding: 10px;
+    text-align: center;
+
+    .button_container {
+      position: fixed;
+      top: 2.5%;
+      right: 5%;
+      height: 27px;
+      width:35px;
+      cursor: pointer;
+      z-index: 100;
+      transition: opacity .25s ease;
+
+
+      &:hover {
+        opacity: .7;
+      }
+
+      &.active {
+        .top {
+          transform: translateY(10px) translateX(0) rotate(45deg);
+          background: #f2f2f2;
+        }
+        .middle {
+          opacity: 0;
+          background: #f2f2f2;
+        }
+
+        .bottom {
+          transform: translateY(-10px) translateX(0) rotate(-45deg);
+          background: #f2f2f2;
+        }
+      }
+
+      span {
+        background: white;
+        border: none;
+        height: 2px;
+        width: 100%;
+        position: absolute;
+        top: 0px;
+        left: 0;
+        transition:  all .35s ease;
+        cursor: pointer;
+
+        &:nth-of-type(2) {
+          top: 10px;
+        }
+
+        &:nth-of-type(3) {
+          top: 20px;
+        }
+      }
+    }
+
+    -webkit-transition: all .7s ease-in-out;
+    -moz-transition: all .7s ease-in-out;
+    -o-transition: all .7s ease-in-out;
+    transition: all .7s ease-in-out;
+  }
+
+  #mobile-menu.fix-mobile-menu {
+    background-color: #1fb287;
+
+    -webkit-transition: all .7s ease-in-out;
+    -moz-transition: all .7s ease-in-out;
+    -o-transition: all .7s ease-in-out;
+    transition: all .7s ease-in-out;
+  }
+
+  .overlay {
+    position: fixed;
+    background: #1fb287;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .35s, visibility .35s, height .35s;
+    overflow: hidden;
+    z-index: 4;
+
+    &.open {
+      opacity: 1;
+      visibility: visible;
+      height: 100%;
+
+      li {
+        animation: fadeInRight .5s ease forwards;
+        animation-delay: .35s;
+
+        &:nth-of-type(2) {
+          animation-delay: .4s;
+        }
+        &:nth-of-type(3) {
+          animation-delay: .45s;
+        }
+        &:nth-of-type(4) {
+          animation-delay: .50s;
+        }
+      }
+    }
+    nav {
+      position: relative;
+      height: 50%;
+      top: 45%;
+      transform: translateY(-50%);
+      font-size: 30px;
+      font-weight: 400;
+      text-align: center;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      display: inline-block;
+      position: relative;
+      height: 100%;
+
+      li {
+        display: block;
+        height: 25%;
+        height: calc(100% / 4);
+        min-height: 50px;
+        position: relative;
+        opacity: 0;
+
+        a {
+          display: block;
+          position: relative;
+          color: #FFF;
+          text-decoration: none;
+          overflow: hidden;
+
+          &:hover:after,
+          &:focus:after,
+          &:active:after {
+            width: 100%;
+          }
+
+          &:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0%;
+            transform: translateX(-50%);
+            height: 3px;
+            background: #FFF;
+            transition: .35s;
+          }
+        }
+      }
+    }
+  }
+
+  .mobile-menu-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+    color: white;
+    background-color: #1FB287;
+
+
+    i {
+      margin: 0 15px;
+    }
+
+    p {
+      margin: 15px;
+    }
+
+    a {
+      margin: 0 5px;
+      color: #f8f8f8;
+    }
+  }
+
+  @keyframes fadeInRight {
+    0% {
+      opacity: 0;
+      left: -20%;
+    }
+    100% {
+      opacity: 1;
+      left: 0;
+    }
   }
 
   #welcome_to_milispace {
@@ -55,7 +249,7 @@
 
     .page-heading {
       position: relative;
-      top: 50px;
+      top: 150px;
     }
 
     .page-heading-content {
@@ -487,8 +681,6 @@
     right: 0;
     bottom: 0;
     height: 50px;
-    //linear-gradient(rgba(31, 178, 135, 0.1), rgba(31, 178, 135, 0.4), rgba(31, 178, 135, 0.6), rgba(31, 178, 135, 0.8), #1FB287, #1FB287)
-    //background: linear-gradient(rgba(248,248,248,0.01),rgba(248, 248, 248, 0.4), rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8), white, white);
     z-index: 2;
   }
 }
