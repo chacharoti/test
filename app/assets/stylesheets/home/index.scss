@@ -66,6 +66,11 @@
       position: relative;
     }
 
+    .main-images {
+      img {
+        zoom: .9;
+      }
+    }
     .gradient-section {
       background: linear-gradient(rgba(31, 178, 135, 0.1), rgba(31, 178, 135, 0.4), rgba(31, 178, 135, 0.6), rgba(31, 178, 135, 0.8), #1FB287, #1FB287);
     }
@@ -221,6 +226,12 @@
     }
 
     .paper-plane {
+      position: absolute;
+      top: 15%;
+      z-index: 1;
+    }
+
+    .paper-plane2 {
       position: absolute;
       top: 15%;
       z-index: 1;
