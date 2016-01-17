@@ -1,52 +1,5 @@
 #landing_page
-  nav#main-nav.navbar.navbar-fixed-top.hidden-xs
-    .container
-      .navbar-header
-        a.navbar-brand href="#{root_path}"
-          img src="assets/logo.png"
-      #navbar-content.collapse.navbar-collapse
-        ul.nav.navbar-nav.navbar-right
-          li
-            a.nav-item href="#"  Welcome
-          li
-            a.nav-item href="#"  Feature
-          li
-            a.nav-item href="#"  Download
-          li
-            a.nav-item href="#"  Contact
-  nav#mobile-menu.navbar.navbar-fixed-top.visible-xs-block
-    img src="assets/logo.png"
-    #toggle.button_container
-      span.top
-      span.middle
-      span.bottom
-  #overlay.overlay
-    nav.overlay-menu
-      ul
-        li
-          a href="#"  Welcome
-        li
-          a href="#"  Features
-        li
-          a href="#"  Download
-        li
-          a href="#"  Contact
-    .mobile-menu-footer
-      p
-        i.fa.fa-facebook
-        i.fa.fa-twitter
-        i.fa.fa-plus
-      p
-        a href="#" Help
-        | |
-        a href="#" User Agreement
-        | |
-        a href="#" Privacy Policy
-        | |
-        a href="#" Milispace Blog
-        | |
-        a href="#" Careers
-      p © Milispace Corporation
+  = render "shared/menu"
   #welcome_to_milispace.section
     .container
       .row.page-heading
