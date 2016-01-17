@@ -8,7 +8,14 @@ var HomeIndexJs = {};
 			'scrollingSpeed': 700,
 			'navigation': true,
 			'navigationPosition': 'right',
-			'scrollBar': true
+			'scrollBar': true,
+        onLeave: function(index, nextIndex, direction){
+          if( nextIndex == 1 ){
+            $('#main-nav').removeClass('fix-menu');
+          }else{
+            $('#main-nav').addClass('fix-menu');
+          }
+        }
 		});
 	}
 } ());

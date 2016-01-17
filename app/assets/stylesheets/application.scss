@@ -37,3 +37,8 @@ body {
 .section {
   overflow: hidden;
 }
+
+#main-nav {
+  position: fixed;
+  z-index: 1;
+}
