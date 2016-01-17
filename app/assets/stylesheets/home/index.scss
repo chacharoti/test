@@ -312,15 +312,42 @@
       top: 0;
     }
 
+    .main-image {
+      position: relative;
+      z-index: 1;
+    }
+
     .big-plane {
       position: absolute;
       top: -27%;
       left: 7%;
+      img {
+        -webkit-animation-name: fly;
+        -webkit-animation-duration: 150000ms;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+      }
+    }
+
+
+    @-webkit-keyframes fly {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(3600deg);
+      }
     }
 
     .small-plane {
       position: absolute;
       top: 50%;
+      img {
+        -webkit-animation-name: fly;
+        -webkit-animation-duration: 300000ms;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+      }
     }
 
     .big-group-cloud {
