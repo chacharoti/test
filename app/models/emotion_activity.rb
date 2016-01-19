@@ -1,0 +1,2 @@
+class EmotionActivity < Activity
+end

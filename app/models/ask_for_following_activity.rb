@@ -1,0 +1,2 @@
+class AskForFollowingActivity < Activity
+end
