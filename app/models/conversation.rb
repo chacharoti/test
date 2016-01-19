@@ -14,4 +14,16 @@ class Conversation < ActiveRecord::Base
   def top_message_created_at
     self.top_message.try(:created_at)
   end
+
+  def recent_sorted_messages
+    self.sorted_messages.includes(:user, :text, :photo, :video, :audio)
+  end
+
+  def more_sorted_messages last_message_id
+    self.recent_sorted_messages.where('messages.id < ?', last_message_id)
+  end
+
+  def add_message message_params, user
+    self.messages.create(message_params.merge(user_id: user.id))
+  end
 end

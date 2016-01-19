@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160111162734) do
+ActiveRecord::Schema.define(version: 20160114174638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,8 +117,6 @@ ActiveRecord::Schema.define(version: 20160111162734) do
     t.datetime "editted_at"
     t.datetime "deleted_at"
     t.string   "status"
-    t.integer  "content_id"
-    t.string   "content_type"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
@@ -208,6 +206,16 @@ ActiveRecord::Schema.define(version: 20160111162734) do
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+
+  create_table "texts", force: :cascade do |t|
+    t.text     "raw"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "owner_type"
+    t.integer  "owner_id"
+  end
+
+  add_index "texts", ["owner_type", "owner_id"], name: "index_texts_on_owner_type_and_owner_id", using: :btree
 
   create_table "user_locations", force: :cascade do |t|
     t.integer  "user_id"
