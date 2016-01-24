@@ -329,16 +329,6 @@
       }
     }
 
-
-    @-webkit-keyframes fly {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(3600deg);
-      }
-    }
-
     .small-plane {
       position: absolute;
       top: 50%;
@@ -360,6 +350,15 @@
       position: absolute;
       top: 64%;
       left: 0%;
+    }
+
+    @-webkit-keyframes fly {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(3600deg);
+      }
     }
 
     .gradient-section {
@@ -466,7 +465,7 @@
   p {
     margin-bottom: 5px;
     letter-spacing: 1.5px;
-    line-height: 20px;
+    line-height: 25px;
   }
 
   .gradient-section {
