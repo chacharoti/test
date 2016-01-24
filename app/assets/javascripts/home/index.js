@@ -5,6 +5,7 @@ var HomeIndexJs = {};
 		$('#landing_page').fullpage({
 			'verticalCentered': false,
 			'css3': true,
+      anchors:['welcome-milispace', 'see-what-hot-nearby', 'find-people-around', 'chatting-and-making-friends', 'follow-and-share', 'history-activities', 'follow-and-download'],
 			'scrollingSpeed': 700,
 			'navigation': true,
 			'navigationPosition': 'right',

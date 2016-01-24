@@ -6,5 +6,11 @@ var SharedMenuJs = {};
       $(this).toggleClass('active');
       $('#overlay').toggleClass('open');
     });
+
+    $('.full-screen-menu-item').click(function() {
+      if( $('#overlay').hasClass('open') ){
+      	$('#toggle').click();
+      }
+    });
   }
 } ());

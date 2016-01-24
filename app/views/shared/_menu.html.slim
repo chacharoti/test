@@ -6,13 +6,13 @@ nav#main-nav.navbar.navbar-fixed-top.hidden-xs
     #navbar-content.collapse.navbar-collapse
       ul.nav.navbar-nav.navbar-right
         li
-          a.nav-item href="#"  Welcome
+          a.nav-item href="#{root_path + '#welcome-milispace' }"  Welcome
         li
-          a.nav-item href="#"  Feature
+          a.nav-item href="#{root_path + '#see-what-hot-nearby' }"  Feature
         li
-          a.nav-item href="#"  Download
+          a.nav-item href="#{root_path + '#follow-and-download' }"  Download
         li
-          a.nav-item href="#"  Contact
+          a.nav-item href="#{root_path + '#follow-and-download' }"  Contact
 nav#mobile-menu.navbar.navbar-fixed-top.visible-xs-block
   img src="assets/logo.png"
   #toggle.button_container
@@ -23,13 +23,13 @@ nav#mobile-menu.navbar.navbar-fixed-top.visible-xs-block
   nav.overlay-menu
     ul
       li
-        a href="#"  Welcome
+        a.full-screen-menu-item href="#{root_path + '#welcome-milispace' }"  Welcome
       li
-        a href="#"  Features
+        a.full-screen-menu-item href="#{root_path + '#see-what-hot-nearby' }"  Features
       li
-        a href="#"  Download
+        a.full-screen-menu-item href="#{root_path + '#follow-and-download' }"  Download
       li
-        a href="#"  Contact
+        a.full-screen-menu-item href="#{root_path + '#follow-and-download' }"  Contact
   .mobile-menu-footer
     p
       i.fa.fa-facebook
