@@ -141,7 +141,7 @@
 
     #download {
       .section-heading {
-        top: 100px;
+        top: 70px;
         margin-top: 0;
       }
 
@@ -157,6 +157,11 @@
 
     .gradient-section {
       visibility: inherit;
+    }
+
+    p {
+      line-height: 20px;
+      font-size: 12px;
     }
   }
 }
