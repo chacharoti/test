@@ -38,6 +38,9 @@ Rails.application.routes.draw do
             post :update_location
             get :nearby
           end
+          member do
+            get :profile
+          end
         end
 
         resources :posts, only: [:index, :create] do

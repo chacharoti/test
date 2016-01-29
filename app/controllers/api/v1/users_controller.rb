@@ -62,7 +62,7 @@ class Api::V1::UsersController < Api::V1::BaseApiController
   end
 
   def info
-    profile_info = Api::V1::Users::ProfileSerializer.new(@current_user).serializable_hash
+    profile_info = Api::V1::Users::BasicProfileSerializer.new(@current_user).serializable_hash
     app_settings = AppSetting.public_items_for_user(@current_user)
     @packets = Packet.get_new_packets(params[:old_packets])
     @emotion_types = EmotionType.all
@@ -106,6 +106,15 @@ class Api::V1::UsersController < Api::V1::BaseApiController
     page = (params[:page] || 1).to_i
     users = User.page(page).per(AppSetting.nearby_people_page_size).to_a
     render json: users, each_serializer: Api::V1::Users::NearbySerializer, root: 'nearby'
+  end
+
+  def profile
+    user_id = params[:id] || params[:user_id]
+    if user_id.present? && @user = User.load_profile(user_id)
+      render json: @user, serializer: Api::V1::Users::ProfileSerializer, current_user: @current_user
+    else
+      raise_invalid_params
+    end
   end
 
   private
