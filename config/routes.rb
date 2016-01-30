@@ -37,6 +37,7 @@ Rails.application.routes.draw do
             post :update_profile_photo
             post :update_location
             get :nearby
+            get :my_profile
           end
           member do
             get :profile

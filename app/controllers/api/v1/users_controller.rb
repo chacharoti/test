@@ -117,6 +117,10 @@ class Api::V1::UsersController < Api::V1::BaseApiController
     end
   end
 
+  def my_profile
+    render json: @current_user, serializer: Api::V1::Users::ProfileSerializer, current_user: @current_user
+  end
+
   private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :nickname, :email, :password, :birthday, :gender, :phone_number, :fb_user_id, :fb_access_token)
