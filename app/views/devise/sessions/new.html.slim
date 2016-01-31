@@ -15,7 +15,7 @@
       .forgot-password
         = link_to "Forgot your password?", new_password_path(resource_name)
       .devide-line
-      = link_to root_path, class: 'login-facebook' do
+      = link_to user_omniauth_authorize_path(:facebook), class: 'login-facebook' do
         i.fa.fa-facebook
         span Login with Facebook
       .sign-up-anchor
