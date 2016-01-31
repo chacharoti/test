@@ -49,9 +49,19 @@ gem 'slim'
 #Forms made easy for Rails
 gem 'simple_form'
 
+#Authenticate facebook login
+gem 'omniauth-facebook'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+
+  #Better errors for testing and debug
+  gem 'better_errors'
+  gem 'binding_of_caller'
+
+  #Prints Ruby objects
+  gem 'awesome_print'
 end
 
 group :development do
