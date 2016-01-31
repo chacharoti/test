@@ -1,0 +1,133 @@
+#sign-in-page {
+  background: #1fb287;
+
+  h1 {
+    margin-bottom: 30px;
+    font-size: 30px;
+    color: white;
+    text-align: center;
+    letter-spacing: 2px;
+  }
+
+  #sign-in {
+    position: relative;
+    top: 50px;
+    width: 50%;
+    margin: auto;
+
+    #user_email,
+    #user_password {
+      width: 100%;
+      padding: 10px 20px;
+      margin-bottom: 20px;
+
+      border: 1px solid rgba(255, 255, 255, 0.66);
+      border-radius: 30px;
+      color: white;
+      background-color: #1FB287;
+      outline: none
+    }
+    ::-webkit-input-placeholder {
+      color: rgba(255, 255, 255, 0.66);
+    }
+    :-moz-placeholder {
+      color: rgba(255, 255, 255, 0.66);
+    }
+    ::-moz-placeholder {
+      color: rgba(255, 255, 255, 0.66);
+    }
+    :-ms-input-placeholder {
+      color: rgba(255, 255, 255, 0.66);
+    }
+
+    .user_remember_me {
+      margin-bottom: 10px;
+      text-align: center;
+      letter-spacing: 2px;
+
+      label {
+        margin-left: 10px;
+        color: white;
+      }
+    }
+
+    .log-in-btn {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px 20px;
+
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: white;
+      background: #dbb10a;
+
+      border-radius: 30px;
+    }
+
+    .forgot-password {
+      margin-bottom: 50px;
+      text-align: center;
+      a {
+        color: white;
+        letter-spacing: 2px;
+      }
+    }
+
+    .devide-line {
+      position: relative;
+      width: 100px;
+      height: 1px;
+      margin: auto;
+      margin-bottom: 20px;
+
+      background: rgba(255, 255, 255, 0.66);
+    }
+
+    .devide-line:before{
+      content: "or";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      padding: 0 10px;
+
+      width: 34px;
+      height: 15px;
+      line-height: 14px;
+
+      color: white;
+      background: #1FB287;
+    }
+
+    .login-facebook {
+      display: block;
+      width: 100%;
+      padding: 10px 20px;
+      margin-bottom: 20px;
+
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+
+      background: #3b5998;
+      color: white;
+      border-radius: 30px;
+    }
+
+    i.fa {
+      margin-right: 10px;
+    }
+
+    .sign-up-anchor {
+      text-align: center;
+      color: white;
+      letter-spacing: 2px;
+      a {
+        color: white;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
