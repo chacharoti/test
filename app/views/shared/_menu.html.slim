@@ -2,7 +2,7 @@ nav#main-nav.navbar.navbar-fixed-top.hidden-xs
   .container
     .navbar-header
       a.navbar-brand href="#{root_path}"
-        img src="assets/logo.png"
+        img src="/assets/logo.png"
     #navbar-content.collapse.navbar-collapse
       ul.nav.navbar-nav.navbar-right
         li
@@ -13,8 +13,10 @@ nav#main-nav.navbar.navbar-fixed-top.hidden-xs
           a.nav-item href="#{root_path + '#follow-and-download' }"  Download
         li
           a.nav-item href="#{root_path + '#follow-and-download' }"  Contact
+        li
+          a.nav-item href="#{new_user_session_path}" Login
 nav#mobile-menu.navbar.navbar-fixed-top.visible-xs-block
-  img src="assets/logo.png"
+  img src="/assets/logo.png"
   #toggle.button_container
     span.top
     span.middle
