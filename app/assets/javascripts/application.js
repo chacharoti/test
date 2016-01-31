@@ -17,5 +17,6 @@
 
 //= require plugin/jquery.fullPage
 //= require plugin/wow
+//= require plugin/jquery.validate
 
 //= require milispace.js
