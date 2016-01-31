@@ -16,7 +16,7 @@ class Conversation < ActiveRecord::Base
   end
 
   def recent_sorted_messages
-    self.sorted_messages.includes(:user, :text, :photo, :video, :audio)
+    self.sorted_messages.includes(:user, :text, :photo, :video, :audio).limit(AppSetting.messages_page_size)
   end
 
   def more_sorted_messages last_message_id

@@ -28,4 +28,8 @@ class AppSetting < ActiveRecord::Base
   def self.inbox_page_size
     AppSetting.find_by(key: "inbox_page_size").value.to_i
   end
+
+  def self.messages_page_size
+    AppSetting.find_by(key: "messages_page_size").value.to_i
+  end
 end
