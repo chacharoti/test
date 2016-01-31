@@ -14,7 +14,10 @@ nav#main-nav.navbar.navbar-fixed-top.hidden-xs
         li
           a.nav-item href="#{root_path + '#follow-and-download' }"  Contact
         li
-          a.nav-item href="#{new_user_session_path}" Login
+          - if user_signed_in?
+            = link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-item'
+          - else
+            a.nav-item href="#{new_user_session_path}" Login
 nav#mobile-menu.navbar.navbar-fixed-top.visible-xs-block
   img src="/assets/logo.png"
   #toggle.button_container
