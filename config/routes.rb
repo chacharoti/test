@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users,
+              controllers: {
+                :registrations => 'registrations',
+                :confirmations => 'confirmations',
+                :omniauth_callbacks => 'users/omniauth_callbacks',
+                :sessions => 'sessions'
+              }
   use_doorkeeper
 
   if Rails.env.staging?
