@@ -8,6 +8,16 @@ var DevisedMainJs = {};
   var validate_sign_up_first_step = DevisedMainJs.validate_sign_up_first_step = function() {
   	$("#new_user").validate();
 
+  	$( "#user_email" ).rules( "add", {
+	    remote: {
+        url: "/users/check_valid_email",
+        type: "get"
+      },
+      messages: {
+		    remote: "Email has been used. Please use another email."
+		  }
+	  });
+
 		$( "#user_email_confirmation" ).rules( "add", {
 	    equalTo: "#user_email",
 	    messages: {
