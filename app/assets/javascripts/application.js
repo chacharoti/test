@@ -14,6 +14,7 @@
 //= require jquery_ujs
 
 //= require bootstrap-sprockets
+//= require bootstrap-datepicker
 
 //= require plugin/jquery.fullPage
 //= require plugin/wow
