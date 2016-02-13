@@ -35,15 +35,28 @@ var DevisedMainJs = {};
   		new WOW().init();
       first_step_is_valid = $("#new_user").valid();
       if(first_step_is_valid){
-      	$('.form-first-step').hide();
-      	$('.form-second-step').show();
+      	$('.first-step').hide();
+      	$('.second-step').show();
       }
   	});
 
   	$('#return-first-step').click(function() {
   		new WOW().init();
-    	$('.form-first-step').show();
-    	$('.form-second-step').hide();
+    	$('.first-step').show();
+    	$('.second-step').hide();
+  	});
+
+  	$('#move-third-step').click(function() {
+    	$('.first-step').hide();
+    	$('.second-step').hide();
+    	$('.third-step').show();
+  	});
+
+  	$('#return-second-step').click(function() {
+  		new WOW().init();
+    	$('.first-step').hide();
+    	$('.second-step').show();
+    	$('.third-step').hide();
   	});
   }
 } ());

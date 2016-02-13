@@ -5,10 +5,12 @@
     position: relative;
   }
 
-  .form-second-step {
+  .second-step, .third-step {
     display: none;
   }
-  .first-step-status {
+  .first-step-status,
+  .second-step-status,
+  .third-step-status {
     position: absolute;
     left: 0;
     right: 0;
@@ -122,14 +124,55 @@
     }
 
     #return-first-step,
-    #move-third-step {
+    #move-third-step,
+    #return-second-step,
+    #completed-sign-up {
       display: inline-block;
       width: 47%;
     }
 
-    #move-third-step {
+    #move-third-step,
+    #completed-sign-up {
       margin-left: 6%;
     }
 
+  }
+
+  #user_profile_photo {
+    display: none;
+  }
+
+  .notice-choose-profile-photo {
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .choose-image {
+    position: relative;
+    margin: auto;
+    margin-bottom: 20px;
+
+    height: 50px;
+    width: 50px;
+
+    border: 3px dotted #14ACE5;
+    cursor: pointer;
+
+    .fa-plus {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+
+
+      height: 20px;
+      width: 18px;
+
+      font-size: 22px;
+      line-height: 22px;
+      color: #14ACE5;
+    }
   }
 }
