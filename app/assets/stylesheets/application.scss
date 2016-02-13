@@ -41,3 +41,10 @@ body {
 .section {
   overflow: hidden;
 }
+
+label.error {
+  color: #DB2B2B;
+  letter-spacing: 1px;
+  text-indent: 20px;
+  margin-bottom: 20px;
+}
