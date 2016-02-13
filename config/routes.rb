@@ -90,6 +90,13 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   constraints subdomain: web_subdomain do
     root 'home#index'
+
+    resources :users do
+      collection do
+        get 'check_valid_email'
+      end
+    end
+
   end
 
   # Example of regular route:
