@@ -1,11 +1,25 @@
-h2
-  | Sign up
-= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = f.error_notification
-  .form-inputs
-    = f.input :email, required: true, autofocus: true
-    = f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
-    = f.input :password_confirmation, required: true
-  .form-actions
-    = f.button :submit, "Sign up"
-= render "devise/shared/links"
+#sign-up-page.navbar-relative
+  = render "shared/menu"
+  .container
+    h1.row
+      | Sign Up
+    .first-step-status
+      img.img-responsive src="/assets/sign_in_page/sign_in1.png"
+      span.status 25%
+
+  #sign-up-container.container-fluid
+    #sign-up
+      = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        = f.error_notification
+        .form-inputs
+          = f.input :email, required: true, label: false, placeholder: 'Email'
+          = f.input :password, required: true, label: false, placeholder: 'Password'
+          = f.input :password_confirmation, required: true, label: false, placeholder: 'Confirm Password'
+        .col-xs-12
+          | By joining. I aggree to Millispace's
+          a href='#' Term
+        .form-actions
+          button.btn.sign-in-next-step type='button' Next Step
+
+javascript:
+  SharedMainJs.set_full_page('sign-up-page');

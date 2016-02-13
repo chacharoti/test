@@ -1,7 +1,7 @@
 #sign-in-page.navbar-relative
   = render "shared/menu"
   .container
-    #sign-in
+    #sign-in.row
       h1
         | Welcome to Milispace
       = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|

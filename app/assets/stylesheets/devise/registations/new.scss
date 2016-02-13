@@ -1,5 +1,97 @@
 #sign-up-page {
- #main-nav {
+  background: #1fb287;
 
- }
+  .container {
+    position: relative;
+  }
+
+  .first-step-status {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+    width: 100px;
+    bottom: -50px;
+
+    span.status {
+      position: absolute;
+      top: 37%;
+      left: 0;
+      right: 0;
+      margin: auto;
+
+      height: 22px;
+      width: 35px;
+      line-height: 22px;
+      font-size: 22px;
+      
+      color: white;
+    }
+  }
+
+  h1 {
+    margin-bottom: 80px;
+    font-size: 30px;
+    color: white;
+    text-align: center;
+    letter-spacing: 2px;
+  }
+
+  #sign-up-container {
+    padding-top: 30px;
+    height: 100%;
+    background: #F6F6F6;
+  }
+
+  #sign-up {
+    position: relative;
+    top: 50px;
+    width: 50%;
+    margin: auto;
+    color: #838383;
+
+    #user_email,
+    #user_password,
+    #user_password_confirmation {
+      width: 100%;
+      padding: 10px 20px;
+      margin-bottom: 20px;
+
+      border: 1px solid #E3E2E2;
+      border-radius: 30px;
+      color: #838383;
+      letter-spacing: 1px;
+      outline: none
+    }
+    ::-webkit-input-placeholder {
+      color: #AFAFAF;
+    }
+    :-moz-placeholder {
+      color: #AFAFAF;
+    }
+    ::-moz-placeholder {
+      color: #AFAFAF;
+    }
+    :-ms-input-placeholder {
+      color: #AFAFAF;
+    }
+
+    .col-xs-12 {
+      margin-bottom: 20px;
+    }
+
+    .sign-in-next-step {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px 20px;
+
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: white;
+      background: #dbb10a;
+
+      border-radius: 30px;
+    }
+  }
 }
