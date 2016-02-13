@@ -3,7 +3,6 @@
 //= require devise/main
 
 $( document ).ready(function() {
-	new WOW().init();
-  HomeMainJs.init();
+  new WOW().init();
   SharedMainJs.init();
 });
