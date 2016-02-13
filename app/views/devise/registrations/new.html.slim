@@ -3,7 +3,7 @@
   .container
     h1.row
       | Sign Up
-    .first-step-status
+    .first-step-status.wow.flipInY data-wow-delay="0.5s" data-wow-duration="1s"
       img.img-responsive src="/assets/sign_in_page/sign_in1.png"
       span.status 25%
 
@@ -11,17 +11,29 @@
     #sign-up
       = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
         = f.error_notification
-        .form-inputs
-          = f.input :email, required: true, label: false, placeholder: 'Email'
-          = f.input :email_confirmation, required: true, label: false, placeholder: 'Retype Email'
-          = f.input :password, required: true, label: false, placeholder: 'Password'
-          
-        .col-xs-12
-          | By joining. I aggree to Millispace's
-          a href='#' Term
-        .form-actions
-          button#move-second-step.btn.sign-in-next-step type='button' Next Step
+        .form-first-step.wow.fadeInDown
+          .form-inputs
+            = f.input :email, required: true, label: false, placeholder: 'Email'
+            = f.input :email_confirmation, required: true, label: false, placeholder: 'Retype Email'   
+            = f.input :password, required: true, label: false, placeholder: 'Password'       
+          .col-xs-12
+            | By joining. I aggree to Millispace's 
+            a href='#' Term                  
+          .form-actions
+            button#move-second-step.btn.sign-in-next-step type='button' Next Step
+        .form-second-step.wow.fadeInDown
+          .form-inputs
+            = f.input :first_name, label: false, placeholder: 'First name'
+            = f.input :last_name, label: false, placeholder: 'Last name'
+            = f.input :nickname, label: false, placeholder: 'Nick name'
+            = f.text_field :birthday, "data-provide" => 'datepicker', placeholder: 'Birthday'
+            = f.input :gender, label: false, placeholder: 'Gender'
+            = f.input :phone_number, label: false, placeholder: 'Phone number'
+          .form-actions
+            button#return-first-step.btn.sign-in-previous-step type='button' Previous Step
+            button#move-third-step.btn.sign-in-next-step type='button' Next Step
 
 javascript:
   SharedMainJs.set_full_page('sign-up-page');
   DevisedMainJs.validate_sign_up_first_step();
+  DevisedMainJs.bind_action_for_button();

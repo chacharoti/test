@@ -27,10 +27,23 @@ var DevisedMainJs = {};
 
 	  $( "#user_password" ).rules( "add", {
 	    minlength: 6
-	  });
+	  });  	
+  }
 
+  var bind_action_for_button = DevisedMainJs.bind_action_for_button = function() {
   	$('#move-second-step').click(function() {
-      $("#new_user").valid();
+  		new WOW().init();
+      first_step_is_valid = $("#new_user").valid();
+      if(first_step_is_valid){
+      	$('.form-first-step').hide();
+      	$('.form-second-step').show();
+      }
+  	});
+
+  	$('#return-first-step').click(function() {
+  		new WOW().init();
+    	$('.form-first-step').show();
+    	$('.form-second-step').hide();
   	});
   }
 } ());

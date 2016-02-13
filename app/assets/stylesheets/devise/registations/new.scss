@@ -5,6 +5,9 @@
     position: relative;
   }
 
+  .form-second-step {
+    display: none;
+  }
   .first-step-status {
     position: absolute;
     left: 0;
@@ -53,7 +56,13 @@
 
     #user_email,
     #user_password,
-    #user_email_confirmation {
+    #user_email_confirmation,
+    #user_first_name,
+    #user_last_name,
+    #user_nickname,
+    #user_birthday,
+    #user_gender,
+    #user_phone_number {
       width: 100%;
       padding: 10px 20px;
       margin-bottom: 20px;
@@ -77,21 +86,50 @@
       color: #AFAFAF;
     }
 
+    .user_first_name,
+    .user_last_name {
+      display: inline-block;
+      width: 47%;
+    }
+
+    .user_last_name {
+      margin-left: 6%;
+    }
+
     .col-xs-12 {
       margin-bottom: 20px;
     }
 
-    .sign-in-next-step {
+    .sign-in-next-step,
+    .sign-in-previous-step {
       width: 100%;
       margin-bottom: 10px;
       padding: 10px 20px;
 
       text-transform: uppercase;
       letter-spacing: 2px;
-      color: white;
-      background: #dbb10a;
+      color: white;      
 
       border-radius: 30px;
     }
+
+    .sign-in-next-step {
+      background: #dbb10a;
+    }
+
+    .sign-in-previous-step {
+      background: #1FB287;
+    }
+
+    #return-first-step,
+    #move-third-step {
+      display: inline-block;
+      width: 47%;
+    }
+
+    #move-third-step {
+      margin-left: 6%;
+    }
+
   }
 }
