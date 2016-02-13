@@ -13,13 +13,15 @@
         = f.error_notification
         .form-inputs
           = f.input :email, required: true, label: false, placeholder: 'Email'
+          = f.input :email_confirmation, required: true, label: false, placeholder: 'Retype Email'
           = f.input :password, required: true, label: false, placeholder: 'Password'
-          = f.input :password_confirmation, required: true, label: false, placeholder: 'Confirm Password'
+          
         .col-xs-12
           | By joining. I aggree to Millispace's
           a href='#' Term
         .form-actions
-          button.btn.sign-in-next-step type='button' Next Step
+          button#move-second-step.btn.sign-in-next-step type='button' Next Step
 
 javascript:
   SharedMainJs.set_full_page('sign-up-page');
+  DevisedMainJs.validate_sign_up_first_step();
