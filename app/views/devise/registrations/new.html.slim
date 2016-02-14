@@ -15,7 +15,10 @@
 
   #sign-up-container.container-fluid
     #sign-up
-      = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      = simple_form_for(resource, as: resource_name, 
+                                  url: registration_path(resource_name),
+                                  format: :json,
+                                  remote: true  ) do |f|
         = f.error_notification
         .first-step.wow.fadeInDown
           .form-inputs
@@ -48,9 +51,16 @@
             input#user_profile_photo type= 'file' name= 'file'
           .form-actions
             button#return-second-step.btn.sign-in-previous-step type='button' Previous Step
-            button#completed-sign-up.btn.sign-in-next-step type='button' Next Completed
+            button#completed-sign-up.btn.sign-in-next-step type='submit' Next Completed
 
 javascript:
   SharedMainJs.set_full_page('sign-up-page');
   DevisedMainJs.validate_sign_up_first_step();
   DevisedMainJs.bind_action_for_button();
+  $("form#new_user").bind("ajax:success", function(e, data, status, xhr) {
+    debugger
+    if (data.success) {
+    } else {
+      return alert('failure!');
+    }
+  });
