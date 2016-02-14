@@ -19,5 +19,8 @@
 //= require plugin/jquery.fullPage
 //= require plugin/wow
 //= require plugin/jquery.validate
+//= require plugin/jquery-file-upload/jquery.ui.widget
+//= require plugin/jquery-file-upload/jquery.iframe-transport
+//= require plugin/jquery-file-upload/jquery.fileupload
 
 //= require milispace.js
