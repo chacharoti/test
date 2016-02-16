@@ -48,19 +48,31 @@
           .form-inputs
             .choose-image onclick="$('#user_profile_photo').click()"
               i.fa.fa-plus
-            input#user_profile_photo type= 'file' name= 'file'
           .form-actions
             button#return-second-step.btn.sign-in-previous-step type='button' Previous Step
             button#completed-sign-up.btn.sign-in-next-step type='submit' Next Completed
+      form#file_upload action="https://milispace-staging.s3.amazonaws.com" method="post" enctype="multipart/form-data" 
+        input type='hidden' name='key'
+        input type='hidden' name= "AWSAccessKeyId" value= "AKIAJT52JRV6F6SEFQRQ"
+        input type='hidden' name= 'acl'  value='public-read'
+        input type='hidden' name= 'policy'
+        input type='hidden' name= 'signature'
+        input type='hidden' name= 'success_action_status' value= "201"
+        input#resource_id type='hidden'
+        input#user_profile_photo type= 'file' name= 'file'
+        button#upload_to_s3_btn type='button' Upload
 
 javascript:
   SharedMainJs.set_full_page('sign-up-page');
   DevisedMainJs.validate_sign_up_first_step();
   DevisedMainJs.bind_action_for_button();
+  DevisedMainJs.s3_direct_upload();
   $("form#new_user").bind("ajax:success", function(e, data, status, xhr) {
-    debugger
     if (data.success) {
+      $('#resource_id').val(data.resource_id);
+      $("#upload_to_s3_btn").click();
     } else {
+      $('#resource_id').val();
       return alert('failure!');
     }
   });
