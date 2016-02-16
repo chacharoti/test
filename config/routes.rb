@@ -42,6 +42,7 @@ Rails.application.routes.draw do
           member do
             get :profile
             post :block
+            post :ask_for_private_chat
           end
         end
 

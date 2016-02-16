@@ -2,7 +2,8 @@ require 'httparty'
 
 class Api::V1::UsersController < Api::V1::BaseApiController
   skip_before_action :require_doorkeeper_authorization, only: [:sign_up, :forgot_password, :email_is_available]
-  before_filter :basic_authenticate, only: [:sign_up, :forgot_password, :email_is_available]
+  before_action :basic_authenticate, only: [:sign_up, :forgot_password, :email_is_available]
+  before_action :select_user, only: [:block, :ask_for_private_chat]
 
   def sign_up
     strong_params = user_params
@@ -122,12 +123,15 @@ class Api::V1::UsersController < Api::V1::BaseApiController
   end
 
   def block
-    blocked_user_id = params[:id]
-    if blocked_user_id.present? && @current_user.block_user_with_id(blocked_user_id)
-      render json: {success: true}, status: :ok
-    else
-      raise_invalid_params
-    end
+    @current_user.block_user(@user)
+
+    render json: {success: true}, status: :ok
+  end
+
+  def ask_for_private_chat
+    @current_user.ask_for_private_chat(@user, ask_for_private_chat_params)
+
+    render json: {success: true}, status: :ok
   end
 
   private
@@ -172,5 +176,16 @@ class Api::V1::UsersController < Api::V1::BaseApiController
     params.require(:location).require(:latitude)
     params.require(:location).require(:longitude)
     params.require(:location).permit(:latitude, :longitude)
+  end
+
+  def select_user
+    user_id = params[:id]
+    unless user_id.present? && @user = User.find_by(id: user_id)
+      raise_invalid_params
+    end
+  end
+
+  def ask_for_private_chat_params
+    params.require(:private_chat).permit(:message)
   end
 end

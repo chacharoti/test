@@ -100,8 +100,11 @@ class User < ActiveRecord::Base
     self.photos.count
   end
 
-  def block_user_with_id blocked_user_id
+  def block_user user
     # TODO: block user
-    return true
+  end
+
+  def ask_for_private_chat user, params
+    user.activities.create(from_user_id: self.id, type: AskForPrivateChatActivity.to_s, message: params[:message])
   end
 end
