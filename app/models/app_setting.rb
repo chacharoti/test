@@ -32,4 +32,8 @@ class AppSetting < ActiveRecord::Base
   def self.messages_page_size
     AppSetting.find_by(key: "messages_page_size").value.to_i
   end
+
+  def self.start_conversation_message
+    AppSetting.find_by(key: "start_conversation_message").value
+  end
 end

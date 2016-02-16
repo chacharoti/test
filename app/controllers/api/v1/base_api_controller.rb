@@ -43,6 +43,13 @@ class Api::V1::BaseApiController < ActionController::Base
     end
   end
 
+  def require_activity
+    activity_id = params[:id] || params[:activity_id]
+    unless activity_id.present? && @activity = Activity.waiting.find_by(id: activity_id)
+      raise_invalid_params
+    end
+  end
+
   def raise_invalid_params
     render json: {error: 'Invalid params'}, status: :unprocessable_entity
   end

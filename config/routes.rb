@@ -69,6 +69,9 @@ Rails.application.routes.draw do
         end
 
         resources :activities, only: [:index] do
+          member do
+            post :accept
+          end
         end
 
         resources :conversations, only: [:index] do
