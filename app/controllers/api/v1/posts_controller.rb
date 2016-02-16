@@ -1,5 +1,5 @@
 class Api::V1::PostsController < Api::V1::BaseApiController
-  before_action :require_post, only: [:followers, :follow, :unfollow]
+  before_action :require_post, only: [:followers, :follow, :unfollow, :report]
 
   def index
     render_posts(Post.latest_items.to_a)
@@ -52,6 +52,12 @@ class Api::V1::PostsController < Api::V1::BaseApiController
 
   def unfollow
     @post.unfollowed_by(@current_user)
+
+    render json: {success: true}, status: :ok
+  end
+
+  def report
+    @post.reported_by(@current_user)
 
     render json: {success: true}, status: :ok
   end

@@ -89,4 +89,8 @@ class Post < ActiveRecord::Base
   def longitude
     self.location.try(:longitude)
   end
+
+  def reported_by user
+    # TODO: report post
+  end
 end
