@@ -4,6 +4,7 @@ class Activity < ActiveRecord::Base
   validates_inclusion_of :status, in: %w( waiting deleted accepted )
 
   scope :waiting, -> { where(status: 'waiting') }
+  scope :available, -> { where('status != ?', 'deleted') }
 
   def accept
     self.update_attribute(:status, 'accepted')

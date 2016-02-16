@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
   end
 
   def recent_activities page
-    self.activities.includes(:from_user).where('deleted != 1').order('id DESC').page(page).per(AppSetting.activities_page_size)
+    self.activities.available.includes(:from_user).order('id DESC').page(page).per(AppSetting.activities_page_size)
   end
 
   def recent_conversations
