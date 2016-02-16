@@ -1,0 +1,2 @@
+class AndroidDevice < Device
+end
