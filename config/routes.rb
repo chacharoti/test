@@ -92,6 +92,7 @@ Rails.application.routes.draw do
   constraints subdomain: web_subdomain do
     root 'home#index'
 
+    resource :documents
     resources :users do
       collection do
         get 'check_valid_email'
