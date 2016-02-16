@@ -99,4 +99,9 @@ class User < ActiveRecord::Base
   def photos_count
     self.photos.count
   end
+
+  def block_user_with_id blocked_user_id
+    # TODO: block user
+    return true
+  end
 end

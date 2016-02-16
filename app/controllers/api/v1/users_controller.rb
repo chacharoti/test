@@ -121,6 +121,15 @@ class Api::V1::UsersController < Api::V1::BaseApiController
     render json: @current_user, serializer: Api::V1::Users::ProfileSerializer, current_user: @current_user
   end
 
+  def block
+    blocked_user_id = params[:id]
+    if blocked_user_id.present? && @current_user.block_user_with_id(blocked_user_id)
+      render json: {success: true}, status: :ok
+    else
+      raise_invalid_params
+    end
+  end
+
   private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :nickname, :email, :password, :birthday, :gender, :phone_number, :fb_user_id, :fb_access_token)
