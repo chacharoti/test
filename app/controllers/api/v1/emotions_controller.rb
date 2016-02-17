@@ -20,7 +20,7 @@ class Api::V1::EmotionsController < Api::V1::BaseApiController
   end
 
   def remove
-    post.remove_emotion(@current_user)
+    @post.remove_emotion(@current_user)
 
     render json: {success: true}, status: :ok
   end

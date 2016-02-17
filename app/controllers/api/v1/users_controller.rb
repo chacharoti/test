@@ -2,7 +2,8 @@ require 'httparty'
 
 class Api::V1::UsersController < Api::V1::BaseApiController
   skip_before_action :require_doorkeeper_authorization, only: [:sign_up, :forgot_password, :email_is_available]
-  before_filter :basic_authenticate, only: [:sign_up, :forgot_password, :email_is_available]
+  before_action :basic_authenticate, only: [:sign_up, :forgot_password, :email_is_available]
+  before_action :select_user, only: [:block, :ask_for_private_chat]
 
   def sign_up
     strong_params = user_params
@@ -62,7 +63,7 @@ class Api::V1::UsersController < Api::V1::BaseApiController
   end
 
   def info
-    profile_info = Api::V1::Users::ProfileSerializer.new(@current_user).serializable_hash
+    profile_info = Api::V1::Users::BasicProfileSerializer.new(@current_user).serializable_hash
     app_settings = AppSetting.public_items_for_user(@current_user)
     @packets = Packet.get_new_packets(params[:old_packets])
     @emotion_types = EmotionType.all
@@ -108,6 +109,31 @@ class Api::V1::UsersController < Api::V1::BaseApiController
     render json: users, each_serializer: Api::V1::Users::NearbySerializer, root: 'nearby'
   end
 
+  def profile
+    user_id = params[:id] || params[:user_id]
+    if user_id.present? && @user = User.load_profile(user_id)
+      render json: @user, serializer: Api::V1::Users::ProfileSerializer, current_user: @current_user
+    else
+      raise_invalid_params
+    end
+  end
+
+  def my_profile
+    render json: @current_user, serializer: Api::V1::Users::ProfileSerializer, current_user: @current_user
+  end
+
+  def block
+    @current_user.block_user(@user)
+
+    render json: {success: true}, status: :ok
+  end
+
+  def ask_for_private_chat
+    @current_user.ask_for_private_chat(@user, ask_for_private_chat_params)
+
+    render json: {success: true}, status: :ok
+  end
+
   private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :nickname, :email, :password, :birthday, :gender, :phone_number, :fb_user_id, :fb_access_token)
@@ -150,5 +176,16 @@ class Api::V1::UsersController < Api::V1::BaseApiController
     params.require(:location).require(:latitude)
     params.require(:location).require(:longitude)
     params.require(:location).permit(:latitude, :longitude)
+  end
+
+  def select_user
+    user_id = params[:id]
+    unless user_id.present? && @user = User.find_by(id: user_id)
+      raise_invalid_params
+    end
+  end
+
+  def ask_for_private_chat_params
+    params.require(:private_chat).permit(:message)
   end
 end

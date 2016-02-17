@@ -16,7 +16,7 @@ class Conversation < ActiveRecord::Base
   end
 
   def recent_sorted_messages
-    self.sorted_messages.includes(:user, :text, :photo, :video, :audio)
+    self.sorted_messages.includes(:user, :text, :photo, :video, :audio).limit(AppSetting.messages_page_size)
   end
 
   def more_sorted_messages last_message_id
@@ -25,5 +25,13 @@ class Conversation < ActiveRecord::Base
 
   def add_message message_params, user
     self.messages.create(message_params.merge(user_id: user.id))
+  end
+
+  def self.start_new_conversation user_ids
+    conversation = Conversation.create
+    conversation.joining_users = User.where('id IN (?)', user_ids)
+    message = conversation.messages.create
+    message.create_text(raw: AppSetting.start_conversation_message)
+    conversation
   end
 end

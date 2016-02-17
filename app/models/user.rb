@@ -8,11 +8,13 @@ class User < ActiveRecord::Base
   devise :omniauthable, :omniauth_providers => [:facebook]
 
   has_one :profile_photo, as: :owner
+  has_one :cover_photo, as: :owner
   has_many :devices, -> { distinct }
   has_many :media, -> { distinct }, as: :owner, dependent: :destroy
   has_many :photos, -> { distinct }, as: :owner, dependent: :destroy
   has_many :top_photos, -> { order("id DESC").limit(5) }, class_name: "Photo", as: :owner
   has_many :posts, dependent: :destroy
+  has_many :top_posts, -> { order("id DESC").limit(5) }, class_name: "Post"
   has_many :locations, class_name: 'UserLocation', dependent: :destroy
   belongs_to :current_location, class_name: 'UserLocation'
   has_many :activities, foreign_key: 'to_user_id', dependent: :destroy
@@ -70,7 +72,7 @@ class User < ActiveRecord::Base
   end
 
   def recent_activities page
-    self.activities.includes(:from_user).where('deleted != 1').order('id DESC').page(page).per(AppSetting.activities_page_size)
+    self.activities.available.includes(:from_user).order('id DESC').page(page).per(AppSetting.activities_page_size)
   end
 
   def recent_conversations
@@ -100,5 +102,29 @@ class User < ActiveRecord::Base
         user.email = data["email"] if user.email.blank?
       end
     end
+  end
+  
+  def self.load_profile(user_id)
+    User.includes(:profile_photo, :cover_photo, :top_photos, top_posts: [{user: [:profile_photo]}, :location, :photos, :video, {top_comment: [:user]}, {top_emotion: [:user]}, :top_follower]).find_by(id: user_id)
+  end
+
+  def following_count
+    0
+  end
+
+  def followers_count
+    0
+  end
+
+  def photos_count
+    self.photos.count
+  end
+
+  def block_user user
+    # TODO: block user
+  end
+
+  def ask_for_private_chat user, params
+    user.activities.create(from_user_id: self.id, type: AskForPrivateChatActivity.to_s, message: params[:message])
   end
 end

@@ -20,10 +20,10 @@ class Api::V1::BaseApiController < ActionController::Base
 
   def require_doorkeeper_authorization
     doorkeeper_authorize!
-    require_user
+    require_current_user
   end
 
-  def require_user
+  def require_current_user
     unless (doorkeeper_token.present? && @current_user ||= User.find(doorkeeper_token[:resource_owner_id]))
       head :unauthorized
     end
@@ -31,15 +31,22 @@ class Api::V1::BaseApiController < ActionController::Base
 
   def require_post
     post_id = params[:id] || params[:post_id]
-    unless @post = Post.find_by(id: post_id)
-      render nothing: true, status: :unprocessable_entity
+    unless post_id.present? && @post = Post.find_by(id: post_id)
+      raise_invalid_params
     end
   end
 
   def require_conversation
     conversation_id = params[:id] || params[:conversation_id]
-    unless @conversation = Conversation.find_by(id: conversation_id)
-      render nothing: true, status: :unprocessable_entity
+    unless conversation_id.present? && @conversation = Conversation.find_by(id: conversation_id)
+      raise_invalid_params
+    end
+  end
+
+  def require_activity
+    activity_id = params[:id] || params[:activity_id]
+    unless activity_id.present? && @activity = Activity.waiting.find_by(id: activity_id)
+      raise_invalid_params
     end
   end
 

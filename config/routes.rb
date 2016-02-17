@@ -41,6 +41,12 @@ Rails.application.routes.draw do
             post :update_profile_photo
             post :update_location
             get :nearby
+            get :my_profile
+          end
+          member do
+            get :profile
+            post :block
+            post :ask_for_private_chat
           end
         end
 
@@ -59,6 +65,7 @@ Rails.application.routes.draw do
             get :followers
             post :follow
             post :unfollow
+            post :report
           end
         end
 
@@ -66,6 +73,9 @@ Rails.application.routes.draw do
         end
 
         resources :activities, only: [:index] do
+          member do
+            post :accept
+          end
         end
 
         resources :conversations, only: [:index] do

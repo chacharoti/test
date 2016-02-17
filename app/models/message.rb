@@ -12,6 +12,7 @@ class Message < ActiveRecord::Base
   scope :sorted, -> { order('id DESC') }
 
   def content_summary
+    # TODO: change this
     "This is a message id##{self.id}, will be changed later"
   end
 
