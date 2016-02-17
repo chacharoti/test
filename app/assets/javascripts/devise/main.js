@@ -85,7 +85,7 @@ var DevisedMainJs = {};
         });
       },
       send: function(e, data) {
-        console.log('begin sending');
+        $("#loading-state").show();
       },
       progress: function(e, data){
       },

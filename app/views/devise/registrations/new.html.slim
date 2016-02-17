@@ -1,5 +1,7 @@
 #sign-up-page.navbar-relative
   = render "shared/menu"
+  #loading-state
+    img src="/assets/loading.png"
   .container
     h1.row
       | Sign Up
@@ -70,7 +72,7 @@ javascript:
   DevisedMainJs.s3_direct_upload();
   $("form#new_user").bind("ajax:success", function(e, data, status, xhr) {
     if (data.success) {
-      console.log('create user successfull');
+      $("#loading-state").hide();
     } else {
       $('#resource_id').val();
       return alert('failure!');

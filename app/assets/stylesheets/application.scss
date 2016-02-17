@@ -49,3 +49,44 @@ label.error {
   text-indent: 20px;
   margin-bottom: 20px;
 }
+
+#loading-state {
+	position: absolute;
+  top: 0;
+  left: 0;
+  border: 0;
+  right: 0;
+  margin: auto;
+  height: 100%;
+  z-index: 99;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  
+  img {
+  	width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+
+    -webkit-animation-name: loading;
+    -webkit-animation-duration: 3000ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+  }
+}
+
+@-webkit-keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  70% {
+    transform: rotate(240deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
