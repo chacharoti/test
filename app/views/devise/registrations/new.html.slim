@@ -48,9 +48,10 @@
           .form-inputs
             .choose-image onclick="$('#user_profile_photo').click()"
               i.fa.fa-plus
+            = f.hidden_field :photo_url
           .form-actions
             button#return-second-step.btn.sign-in-previous-step type='button' Previous Step
-            button#completed-sign-up.btn.sign-in-next-step type='submit' Next Completed
+            button#completed-sign-up.btn.sign-in-next-step type='button' Next Completed
       form#file_upload action="https://milispace-staging.s3.amazonaws.com" method="post" enctype="multipart/form-data" 
         input type='hidden' name='key'
         input type='hidden' name= "AWSAccessKeyId" value= "AKIAJT52JRV6F6SEFQRQ"
@@ -69,8 +70,7 @@ javascript:
   DevisedMainJs.s3_direct_upload();
   $("form#new_user").bind("ajax:success", function(e, data, status, xhr) {
     if (data.success) {
-      $('#resource_id').val(data.resource_id);
-      $("#upload_to_s3_btn").click();
+      console.log('create user successfull');
     } else {
       $('#resource_id').val();
       return alert('failure!');
