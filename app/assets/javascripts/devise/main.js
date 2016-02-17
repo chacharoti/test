@@ -59,4 +59,45 @@ var DevisedMainJs = {};
     	$('.third-step').hide();
   	});
   }
+
+  var s3_direct_upload = DevisedMainJs.s3_direct_upload = function() {
+    var form = $('#file_upload');
+    $('#file_upload').fileupload({
+      url: $('#file_upload').attr('action'),
+      type: 'POST',
+      autoUpload: true,
+      dataType: 'xml',
+      add: function (event, data) {
+        $.ajax({
+          url: "/documents",
+          type: 'POST',
+          dataType: 'json',
+          data: {doc: {title: data.files[0].name}},
+          async: false,
+          success: function(data) {
+            form.find('input[name=key]').val(data.key)
+            form.find('input[name=policy]').val(data.policy)
+            form.find('input[name=signature]').val(data.signature)
+          }
+        })
+        $("#completed-sign-up").on('click', function () {
+          data.submit();
+        });
+      },
+      send: function(e, data) {
+        console.log('begin sending');
+      },
+      progress: function(e, data){
+      },
+      fail: function(e, data) {
+      },
+      success: function(data) {
+        var url = $(data).find('Location').text();
+        $('#user_photo_url').val(url);
+        $('#new_user').submit();
+      },
+      done: function (event, data) {
+      },
+    })
+  }
 } ());
