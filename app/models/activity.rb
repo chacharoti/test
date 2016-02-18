@@ -12,6 +12,8 @@ class Activity < ActiveRecord::Base
       self.update_attribute(:status, 'accepted')
       if self.type == AskForPrivateChatActivity.to_s
         self.start_new_conversation
+      elsif self.type == AskForFollowingActivity.to_s
+        self.start_following
       end
     end
   end

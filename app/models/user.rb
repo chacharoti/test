@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
   has_many :conversations, through: :conversation_users
   has_many :joining_conversation_users, -> { joining }, class_name: 'ConversationUser'
   has_many :joining_conversations, through: :joining_conversation_users, source: :conversation
+  has_many :follower_users, class_name: 'FollowerUser', foreign_key: 'user_id', dependent: :destroy
+  has_many :followers, through: :follower_users
+  has_many :following_users, class_name: 'FollowerUser', foreign_key: 'follower_id', dependent: :destroy
+  has_many :followings, through: :following_users
 
   before_create :downcase_email
 
@@ -86,14 +90,6 @@ class User < ActiveRecord::Base
 
   def self.load_profile(user_id)
     User.includes(:profile_photo, :cover_photo, :top_photos, top_posts: [{user: [:profile_photo]}, :location, :photos, :video, {top_comment: [:user]}, {top_emotion: [:user]}, :top_follower]).find_by(id: user_id)
-  end
-
-  def following_count
-    0
-  end
-
-  def followers_count
-    0
   end
 
   def photos_count
