@@ -105,6 +105,8 @@ class User < ActiveRecord::Base
   end
 
   def ask_for_private_chat user, params
-    user.activities.create(from_user_id: self.id, type: AskForPrivateChatActivity.to_s, message: params[:message])
+    if self.id != user.id
+      user.activities.create(from_user_id: self.id, type: AskForPrivateChatActivity.to_s, message: params[:message])
+    end
   end
 end
