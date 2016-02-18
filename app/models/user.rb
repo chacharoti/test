@@ -109,4 +109,10 @@ class User < ActiveRecord::Base
       user.activities.create(from_user_id: self.id, type: AskForPrivateChatActivity.to_s, message: params[:message])
     end
   end
+
+  def ask_for_following user, params
+    if self.id != user.id
+      user.activities.create(from_user_id: self.id, type: AskForFollowingActivity.to_s, message: params[:message])
+    end
+  end
 end
