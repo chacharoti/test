@@ -45,7 +45,7 @@ class Api::V1::BaseApiController < ActionController::Base
 
   def require_activity
     activity_id = params[:id] || params[:activity_id]
-    unless activity_id.present? && @activity = Activity.waiting.find_by(id: activity_id)
+    unless activity_id.present? && @activity = Activity.find_by(id: activity_id)
       raise_invalid_params
     end
   end
