@@ -3,6 +3,8 @@ class Activity < ActiveRecord::Base
   belongs_to :to_user, class_name: 'User'
   validates_inclusion_of :status, in: ['', 'deleted', 'accepted']
 
+  scope :available, -> { where("status != ?", 'deleted') }
+
   def available_for_accept?
     self.status.empty?
   end
@@ -16,5 +18,19 @@ class Activity < ActiveRecord::Base
         self.start_following
       end
     end
+  end
+
+  def available_for_delete?
+    self.status.empty?
+  end
+
+  def delete
+    if self.available_for_delete?
+      self.update_attribute(:status, 'deleted')
+    end
+  end
+
+  def belongs_to_user? user
+    self.to_user_id == user.id
   end
 end

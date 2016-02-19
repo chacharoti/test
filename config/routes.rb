@@ -72,6 +72,7 @@ Rails.application.routes.draw do
         resources :activities, only: [:index] do
           member do
             post :accept
+            post :delete
           end
         end
 
