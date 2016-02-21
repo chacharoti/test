@@ -5,17 +5,30 @@
     position: relative;
   }
 
-  .second-step, .third-step {
+  .second-step, 
+  .third-step,
+  .fourth-step {
     display: none;
   }
 
-  .third-step {
+  .third-step,
+  .fourth-step, {
     text-align: center;
+  }
+
+  .fourth-step {
+    color: white;
+    letter-spacing: 1px;
+
+    h2 {
+      margin-bottom: 30px;
+    }
   }
 
   .first-step-status,
   .second-step-status,
-  .third-step-status {
+  .third-step-status,
+  .fourth-step-status {
     position: absolute;
     left: 0;
     right: 0;
@@ -40,6 +53,11 @@
     }
   }
 
+  .fourth-step-status {
+    position: relative;
+    margin-top: 70px;
+  }
+  
   h1 {
     margin-bottom: 80px;
     font-size: 30px;
@@ -197,5 +215,9 @@
 
   #s3-direct-upload {
     display: none;
+  }
+
+  .green-background {
+    background-color: #1FB287 !important;
   }
 }

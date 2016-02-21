@@ -118,6 +118,12 @@ var DevisedMainJs = {};
           beforeSend: function( xhr ) {
           },
           complete: function( xhr,status ) {
+            $('.first-step').hide();
+            $('.second-step').hide();
+            $('.third-step').hide();
+            $('.fourth-step').show();
+            $('#sign-up-container').addClass('green-background');
+            $('h1.row').hide();
           }
         })
         

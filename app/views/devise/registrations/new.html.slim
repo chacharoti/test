@@ -14,6 +14,8 @@
     .third-step-status.third-step.wow.flipInY data-wow-delay="0.5s" data-wow-duration="1s"
       img.img-responsive src="/assets/sign_in_page/sign_in3.png"
       span.status 75%
+    .fourth-step-status.fourth-step.wow.flipInY data-wow-delay="0.5s" data-wow-duration="1s"
+      img.img-responsive src="/assets/sign_in_page/sign_in4.png"
 
   #sign-up-container.container-fluid
     #sign-up
@@ -56,6 +58,11 @@
             button#return-second-step.btn.sign-in-previous-step type='button' Previous Step
             button#completed-sign-up.btn.sign-in-next-step type='button' Next Completed
             button#s3-direct-upload.btn.sign-in-next-step type='button' 
+
+        .fourth-step.wow.fadeInDown
+          h2 Complete
+          p Wish you have a wonderful night with Milispace!
+          
       form#file_upload action="https://milispace-staging.s3.amazonaws.com" method="post" enctype="multipart/form-data" 
         input type='hidden' name='key'
         input type='hidden' name= "AWSAccessKeyId" value= "AKIAJT52JRV6F6SEFQRQ"
