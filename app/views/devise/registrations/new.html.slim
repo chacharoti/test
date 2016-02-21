@@ -47,10 +47,11 @@
 
         .third-step.wow.fadeInDown
           p.notice-choose-profile-photo Please choose your Profile photo
-          .form-inputs
+          .form-inputs.choose-image-wrap
             .choose-image onclick="$('#user_profile_photo').click()"
               i.fa.fa-plus
             = f.hidden_field :photo_url
+          img#display-img-url src="#" alt="your image" onclick="$('#user_profile_photo').click()"
           .form-actions
             button#return-second-step.btn.sign-in-previous-step type='button' Previous Step
             button#completed-sign-up.btn.sign-in-next-step type='button' Next Completed
@@ -69,6 +70,7 @@ javascript:
   SharedMainJs.set_full_page('sign-up-page');
   DevisedMainJs.validate_sign_up_first_step();
   DevisedMainJs.bind_action_for_button();
+  DevisedMainJs.load_profile_picture();
   DevisedMainJs.s3_direct_upload();
   $("form#new_user").bind("ajax:success", function(e, data, status, xhr) {
     if (data.success) {
@@ -78,3 +80,4 @@ javascript:
       return alert('failure!');
     }
   });
+  

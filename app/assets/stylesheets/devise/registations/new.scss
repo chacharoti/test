@@ -8,6 +8,11 @@
   .second-step, .third-step {
     display: none;
   }
+
+  .third-step {
+    text-align: center;
+  }
+
   .first-step-status,
   .second-step-status,
   .third-step-status {
@@ -175,5 +180,13 @@
       line-height: 22px;
       color: #14ACE5;
     }
+  }
+
+  #display-img-url {
+    display: none;
+    padding: 20px;
+    max-width: 100%;
+    max-height: 300px;
+    cursor: pointer;
   }
 }

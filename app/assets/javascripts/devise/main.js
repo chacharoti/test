@@ -100,4 +100,23 @@ var DevisedMainJs = {};
       },
     })
   }
+
+  var load_profile_picture = DevisedMainJs.load_profile_picture = function() {
+    $("#user_profile_photo").change(function(){
+      $('.choose-image-wrap').hide();
+      $('#display-img-url').fadeIn('1000');
+      readURL(this);
+    });
+  }
+
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();            
+      reader.onload = function (e) {
+          $('#display-img-url').attr('src', e.target.result);
+      }
+      
+      reader.readAsDataURL(input.files[0]);
+    }
+  }  
 } ());
