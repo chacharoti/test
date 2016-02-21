@@ -41,7 +41,7 @@
         text-decoration: none;
 
         border: 1px solid rgba(255, 255, 255, 0.66);
-        border-radius: 20px;
+        border-radius: 50px;
 
         -webkit-transition: all .1s ease-in-out;
         -moz-transition: all .1s ease-in-out;
@@ -400,7 +400,7 @@
       text-decoration: none;
 
       border: 1px solid #6bccb0;
-      border-radius: 20px;
+      border-radius: 50px;
 
       -webkit-transition: all .1s ease-in-out;
       -moz-transition: all .1s ease-in-out;
@@ -445,6 +445,21 @@
         color: #666666;
       }
     }
+
+    .new-letter-wrap {
+      position: relative;
+    }
+
+    .add-new-letter {
+      position: absolute;
+      top: 26%;
+      right: 12%;
+      padding: 2%;
+      
+      color: #A3A3A3;
+      cursor: pointer;
+    }
+
   }
 
   .label-tag {
