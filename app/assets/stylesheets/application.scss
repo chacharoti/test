@@ -50,7 +50,7 @@ label.error {
   margin-bottom: 20px;
 }
 
-#loading-state {
+.loading {
 	position: absolute;
   top: 0;
   left: 0;
@@ -58,9 +58,8 @@ label.error {
   right: 0;
   margin: auto;
   height: 100%;
-  z-index: 99;
-  background: rgba(0, 0, 0, 0.5);
-  display: none;
+  z-index: 999;
+  background: rgb(86, 100, 88);
   
   img {
   	width: 50px;
