@@ -2,12 +2,6 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
     if resource.save
-      if resource.class == User and profile_photo_url.present?
-        ProfilePhoto.create(owner: resource, file_key: profile_photo_url, 
-                            thumbnail_size: profile_photo_url, 
-                            normal_size: profile_photo_url )
-      end
-
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_up(resource_name, resource)

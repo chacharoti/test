@@ -68,19 +68,19 @@ var DevisedMainJs = {};
       autoUpload: true,
       dataType: 'xml',
       add: function (event, data) {
-        $.ajax({
-          url: "/documents",
-          type: 'POST',
-          dataType: 'json',
-          data: {doc: {title: data.files[0].name}},
-          async: false,
-          success: function(data) {
-            form.find('input[name=key]').val(data.key)
-            form.find('input[name=policy]').val(data.policy)
-            form.find('input[name=signature]').val(data.signature)
-          }
-        })
-        $("#completed-sign-up").on('click', function () {
+        $("#s3-direct-upload").on('click', function () {
+          $.ajax({
+            url: "/documents",
+            type: 'POST',
+            dataType: 'json',
+            data: {doc: {title: data.files[0].name}, user_id: $('#resource_id').val()},
+            async: false,
+            success: function(data) {            
+              form.find('input[name=key]').val(data.key);
+              form.find('input[name=policy]').val(data.policy);
+              form.find('input[name=signature]').val(data.signature);
+            }
+          })        
           data.submit();
         });
       },
@@ -91,12 +91,27 @@ var DevisedMainJs = {};
       },
       fail: function(e, data) {
       },
-      success: function(data) {
+      success: function(data) {        
         var url = $(data).find('Location').text();
-        $('#user_photo_url').val(url);
-        $('#new_user').submit();
+        console.log(url);
+        var resource_id = $('#resource_id').val();
+        var url_params = {
+          normal_size_url: url
+        };
+        $.ajax({
+          type: "PUT",
+          url: '/users/' + resource_id + '/add_media',
+          data: url_params,
+          beforeSend: function( xhr ) {
+          },
+          complete: function( xhr,status ) {
+            console.log('success');
+          }
+        })
+        
       },
       done: function (event, data) {
+        $("#loading-state").hide();
       },
     })
   }

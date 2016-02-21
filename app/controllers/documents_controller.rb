@@ -1,9 +1,11 @@
 class DocumentsController < ApplicationController
   def create
+    file_name = file.first
+    file_extension = file.last
     render :json => {
       :policy => s3_upload_policy_document, 
       :signature => s3_upload_signature, 
-      :key => "uploads/#{SecureRandom.uuid}/#{params[:doc][:title]}", 
+      :key => "users/#{ get_user.unique_identifier }/photos/#{ file_name }_normal.#{ file_extension }", 
       :success_action_redirect => '/'
     }
   end
@@ -20,7 +22,7 @@ class DocumentsController < ApplicationController
         conditions: [
           { bucket: 'milispace-staging' },
           { acl: 'public-read' },
-          ["starts-with", "$key", "uploads/"],
+          ["starts-with", "$key", "users/"],
           { success_action_status: '201' }
         ]
       }.to_json
@@ -35,5 +37,19 @@ class DocumentsController < ApplicationController
         s3_upload_policy_document
       )
     ).gsub(/\n/, '')
+  end
+
+  def user_id
+    params[:user_id]
+  end
+
+  def get_user
+    if user_id
+      User.find user_id
+    end
+  end
+
+  def file
+    params[:doc][:title].split('.')
   end
 end

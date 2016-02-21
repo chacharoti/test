@@ -107,6 +107,10 @@ Rails.application.routes.draw do
       collection do
         get 'check_valid_email'
       end
+      
+      member do
+        put 'add_media'
+      end
     end
 
   end
