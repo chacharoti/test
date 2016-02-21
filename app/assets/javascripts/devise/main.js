@@ -58,6 +58,20 @@ var DevisedMainJs = {};
     	$('.second-step').show();
     	$('.third-step').hide();
   	});
+
+    $("#completed-sign-up").on('click', function () {
+      $("#loading-state").show();
+      $('#new_user').submit();
+    });
+
+    $("form#new_user").bind("ajax:success", function(e, data, status, xhr) {
+      if (data.success) {
+        $('#resource_id').val( data.resource_id );
+        $("#s3-direct-upload").click();
+      } else {
+        return alert('failure!');
+      }
+    });    
   }
 
   var s3_direct_upload = DevisedMainJs.s3_direct_upload = function() {
@@ -93,7 +107,6 @@ var DevisedMainJs = {};
       },
       success: function(data) {        
         var url = $(data).find('Location').text();
-        console.log(url);
         var resource_id = $('#resource_id').val();
         var url_params = {
           normal_size_url: url
@@ -105,7 +118,6 @@ var DevisedMainJs = {};
           beforeSend: function( xhr ) {
           },
           complete: function( xhr,status ) {
-            console.log('success');
           }
         })
         
@@ -129,8 +141,7 @@ var DevisedMainJs = {};
       var reader = new FileReader();            
       reader.onload = function (e) {
           $('#display-img-url').attr('src', e.target.result);
-      }
-      
+      }      
       reader.readAsDataURL(input.files[0]);
     }
   }  
