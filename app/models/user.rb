@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   attr_accessor :email_confirmation, :photo_url
   
+  REQUIRED_FIELDS = [:first_name, :last_name, :nickname, :birthday, :gender]
+  validates_presence_of *REQUIRED_FIELDS
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, :omniauth_providers => [:facebook]
