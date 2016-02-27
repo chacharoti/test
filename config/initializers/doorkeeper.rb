@@ -15,7 +15,7 @@ Doorkeeper.configure do
           user
         end
       elsif user = User.find_by(fb_user_id: username)
-        if user.fb_acress_token == password
+        if user.fb_access_token == password
           user
         end
       end
