@@ -27,12 +27,34 @@ var DevisedMainJs = {};
 
 	  $( "#user_password" ).rules( "add", {
 	    minlength: 6
-	  });  	
+	  });  
+
+    $( "#user_first_name" ).rules( "add", {
+      required: true,
+      minlength: 2,
+    });
+
+    $( "#user_last_name" ).rules( "add", {
+      required: true,
+      minlength: 2,
+    });
+    
+    $( "#user_nickname" ).rules( "add", {
+      required: true,
+      minlength: 2,
+    });
+    
+    $( "#user_birthday" ).rules( "add", {
+      required: true,
+    });
+    
+    $( "#user_gender" ).rules( "add", {
+      required: true
+    });
   }
 
   var bind_action_for_button = DevisedMainJs.bind_action_for_button = function() {
   	$('#move-second-step').click(function() {
-  		new WOW().init();
       first_step_is_valid = $("#new_user").valid();
       if(first_step_is_valid){
       	$('.first-step').hide();
@@ -47,9 +69,13 @@ var DevisedMainJs = {};
   	});
 
   	$('#move-third-step').click(function() {
-    	$('.first-step').hide();
-    	$('.second-step').hide();
-    	$('.third-step').show();
+      second_step_is_valid = $("#new_user").valid();
+      if(second_step_is_valid){
+        $("#new_user").valid();
+      	$('.first-step').hide();
+      	$('.second-step').hide();
+      	$('.third-step').show();
+      }
   	});
 
   	$('#return-second-step').click(function() {

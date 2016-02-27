@@ -90,7 +90,7 @@
     #user_phone_number {
       width: 100%;
       padding: 10px 20px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
 
       border: 1px solid #E3E2E2;
       border-radius: 30px;
@@ -117,8 +117,12 @@
       width: 47%;
     }
 
+    .user_first_name {
+      float: left;
+    }
+
     .user_last_name {
-      margin-left: 6%;
+      float: right;
     }
 
     .col-xs-12 {

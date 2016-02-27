@@ -37,8 +37,9 @@
 
         .second-step.wow.fadeInDown
           .form-inputs
-            = f.input :first_name, label: false, placeholder: 'First name'
-            = f.input :last_name, label: false, placeholder: 'Last name'
+            .full-name
+              = f.input :first_name, label: false, placeholder: 'First name'
+              = f.input :last_name, label: false, placeholder: 'Last name'
             = f.input :nickname, label: false, placeholder: 'Nick name'
             = f.text_field :birthday, "data-provide" => 'datepicker', placeholder: 'Birthday'
             = f.input :gender, label: false, placeholder: 'Gender'
