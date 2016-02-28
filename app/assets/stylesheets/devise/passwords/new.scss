@@ -1,0 +1,66 @@
+#forgot-passwords-page {
+	background: #1fb287;
+
+  h1 {
+    margin-bottom: 80px;
+    font-size: 30px;
+    color: white;
+    text-align: center;
+    letter-spacing: 2px;
+  }
+
+  #forgot-passwords-container {
+    height: 100%;
+    background: #F6F6F6;
+  }
+
+  #new_user {
+  	text-align: center;
+  }
+
+  #forgot-password{
+    position: relative;
+    top: 50px;
+    width: 50%;
+    margin: auto;
+
+    #user_email {
+      width: 100%;
+      padding: 10px 20px;
+      margin-bottom: 10px;
+
+      border: 1px solid #E3E2E2;
+      border-radius: 30px;
+      color: #838383;
+      letter-spacing: 1px;
+      outline: none;
+    }
+    ::-webkit-input-placeholder {
+      color: #AFAFAF;
+    }
+    :-moz-placeholder {
+      color: #AFAFAF;
+    }
+    ::-moz-placeholder {
+      color: #AFAFAF;
+    }
+    :-ms-input-placeholder {
+      color: #AFAFAF;
+    }
+
+    #send-email{
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px 20px;
+
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: white;      
+
+      border-radius: 30px;
+      border: none;
+      background: #dbb10a;
+    }
+
+  }
+}

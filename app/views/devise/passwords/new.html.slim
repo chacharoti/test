@@ -1,9 +1,15 @@
-h2
-  | Forgot your password?
-= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-  = f.error_notification
-  .form-inputs
-    = f.input :email, required: true, autofocus: true
-  .form-actions
-    = f.button :submit, "Send me reset password instructions"
-= render "devise/shared/links"
+#forgot-passwords-page.navbar-relative
+  = render "shared/menu"
+  .container
+  	h1.row
+  		| Forgot your password?
+  #forgot-passwords-container.container-fluid
+    #forgot-password.row
+      = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+				h4 Please enter your email or phone. We will send you and email to reset your password.
+				.form-inputs
+					= f.input :email, required: true, label: false, placeholder: 'Email'
+				.form-actions
+					= f.button :submit, "Send", id: 'send-email'
+javascript:
+  SharedMainJs.set_full_page('forgot-passwords-page');
