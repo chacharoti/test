@@ -1,5 +1,5 @@
 class Api::V1::ActivitiesController < Api::V1::BaseApiController
-  before_action :require_activity, only: [:accept]
+  before_action :require_activity, only: [:accept, :delete]
 
   def index
     page = (params[:page] || 1).to_i
@@ -12,6 +12,15 @@ class Api::V1::ActivitiesController < Api::V1::BaseApiController
     if @activity.to_user_id == @current_user.id
       @activity.accept
       render json: {success: true}, status: :ok
+    else
+      raise_invalid_params
+    end
+  end
+
+  def delete
+    if @activity.belongs_to_user?(@current_user)
+      @activity.delete
+      render json: { success: true }, status: :ok
     else
       raise_invalid_params
     end

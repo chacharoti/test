@@ -3,7 +3,7 @@ require 'httparty'
 class Api::V1::UsersController < Api::V1::BaseApiController
   skip_before_action :require_doorkeeper_authorization, only: [:sign_up, :forgot_password, :email_is_available]
   before_action :basic_authenticate, only: [:sign_up, :forgot_password, :email_is_available]
-  before_action :select_user, only: [:block, :ask_for_private_chat]
+  before_action :select_user, only: [:block, :ask_for_private_chat, :ask_for_following]
 
   def sign_up
     strong_params = user_params
@@ -134,6 +134,12 @@ class Api::V1::UsersController < Api::V1::BaseApiController
     render json: {success: true}, status: :ok
   end
 
+  def ask_for_following
+    @current_user.ask_for_following(@user, ask_for_following_params)
+
+    render json: {success: true}, status: :ok
+  end
+
   private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :nickname, :email, :password, :birthday, :gender, :phone_number, :fb_user_id, :fb_access_token)
@@ -187,5 +193,9 @@ class Api::V1::UsersController < Api::V1::BaseApiController
 
   def ask_for_private_chat_params
     params.require(:private_chat).permit(:message)
+  end
+
+  def ask_for_following_params
+    params.require(:following).permit(:message)
   end
 end

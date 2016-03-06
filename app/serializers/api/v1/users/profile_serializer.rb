@@ -1,5 +1,5 @@
 class Api::V1::Users::ProfileSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :nickname, :birthday, :gender, :following_count, :followers_count, :photos_count, :top_posts
+  attributes :id, :first_name, :last_name, :nickname, :birthday, :gender, :followings_count, :followers_count, :photos_count, :top_posts
 
   has_one :profile_photo, serializer: Api::V1::MediaSerializer
   has_one :cover_photo, serializer: Api::V1::MediaSerializer

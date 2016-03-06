@@ -47,6 +47,7 @@ Rails.application.routes.draw do
             get :profile
             post :block
             post :ask_for_private_chat
+            post :ask_for_following
           end
         end
 
@@ -75,6 +76,7 @@ Rails.application.routes.draw do
         resources :activities, only: [:index] do
           member do
             post :accept
+            post :delete
           end
         end
 
