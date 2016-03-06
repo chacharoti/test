@@ -4,6 +4,11 @@ class UsersController < ApplicationController
   def hot
   end
 
+  def add_user_location
+    result = get_user.update_location location_params
+    render :json => {success: result}
+  end
+
   def add_media
     updated_user = get_user
     normal_size_url.slice! AppSetting.media_url
@@ -39,5 +44,9 @@ class UsersController < ApplicationController
 
   def normal_size_url
     params[:normal_size_url]
+  end
+
+  def location_params
+    params.require(:location_params).permit(:latitude, :longitude)
   end
 end

@@ -109,6 +109,7 @@ Rails.application.routes.draw do
       collection do
         get 'check_valid_email'
         get 'hot'
+        post 'add_user_location'
       end
       
       member do

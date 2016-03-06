@@ -5,6 +5,7 @@
 				input#search-input placeholder= "Men and Women in VietNam" type="search"
 				img src="/assets/user/filter.png"
 	.container
+		input#user_id type="hidden" value= "#{current_user.id}"
 		.tab-content
 			#hot-tab.tab-pane.active role="tabpanel"  Hot
 			#people-tab.tab-pane role="tabpanel"  People
@@ -34,3 +35,5 @@ footer#footer
 	      a aria-controls="more" data-toggle="tab" href="#more-tab" role="tab"
 	      	img.deactive src="/assets/user/more.png"
 	      	img.active src="/assets/user/more1.png"
+javascript:
+	UserMainJs.set_user_location();
