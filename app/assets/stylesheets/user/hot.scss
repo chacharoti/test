@@ -1,0 +1,49 @@
+#hot-page {
+	#search-bar {
+		background-color: #1FB287;
+
+    .row {
+      padding: 20px 0;
+      text-align: center;
+    }
+    
+
+    img {
+      max-width: 25px;
+      min-width: 25px;
+      float: right;
+      position: relative;
+      top: 7px;
+      cursor: pointer;
+    }
+
+    #search-input {
+      padding: 10px 20px;
+      width: 90%;
+      background: #20CF9C;
+      color: white;
+
+      border: none;
+      border-radius: 50px;
+      letter-spacing: 1px;
+    }
+
+    ::-webkit-input-placeholder {
+      color: #BFEDDC;
+    }
+    :-moz-placeholder {
+      color: #BFEDDC;
+    }
+    ::-moz-placeholder {
+      color: #BFEDDC;
+    }
+    :-ms-input-placeholder {
+      color: #BFEDDC;
+    }
+
+    i {
+      color: white;
+      cursor: pointer;
+    }
+	}
+}

@@ -1,0 +1,36 @@
+#hot-page.navbar-relative
+	.container-fluid#search-bar
+		.container
+			.row
+				input#search-input placeholder= "Men and Women in VietNam" type="search"
+				img src="/assets/user/filter.png"
+	.container
+		.tab-content
+			#hot-tab.tab-pane.active role="tabpanel"  Hot
+			#people-tab.tab-pane role="tabpanel"  People
+			#messages-tab.tab-pane role="tabpanel"  Inbox
+			#noti-tab.tab-pane role="tabpanel"  Noti
+			#more-tab.tab-pane role="tabpanel"  More
+footer#footer
+	div
+	  ul.nav.nav-tabs role="tablist" 
+	    li.footer-item.active role="presentation" 
+	      a aria-controls="hot" data-toggle="tab" href="#hot-tab" role="tab"
+	      	img.deactive src="/assets/user/hot.png"
+	      	img.active src="/assets/user/hot1.png"
+	    li.footer-item role="presentation" 
+	      a aria-controls="profile" data-toggle="tab" href="#people-tab" role="tab"
+	      	img.deactive src="/assets/user/people.png"
+	      	img.active src="/assets/user/people1.png"
+	    li.footer-item role="presentation" 
+	      a aria-controls="messages" data-toggle="tab" href="#messages-tab" role="tab"
+	      	img.deactive src="/assets/user/message.png"
+	      	img.active src="/assets/user/message1.png"
+	    li.footer-item role="presentation" 
+	      a aria-controls="noti" data-toggle="tab" href="#noti-tab" role="tab"
+	      	img.deactive src="/assets/user/noti.png"
+	      	img.active src="/assets/user/noti1.png"
+	    li.footer-item role="presentation" 
+	      a aria-controls="more" data-toggle="tab" href="#more-tab" role="tab"
+	      	img.deactive src="/assets/user/more.png"
+	      	img.active src="/assets/user/more1.png"
