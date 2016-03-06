@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!, except: [:check_valid_email]
 
+  def hot
+  end
+
   def add_media
     updated_user = get_user
     normal_size_url.slice! AppSetting.media_url

@@ -106,6 +106,7 @@ Rails.application.routes.draw do
     resources :users do
       collection do
         get 'check_valid_email'
+        get 'hot'
       end
       
       member do
