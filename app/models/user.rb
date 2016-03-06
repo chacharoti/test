@@ -138,4 +138,8 @@ class User < ActiveRecord::Base
       user.activities.create(from_user_id: self.id, type: AskForFollowingActivity.to_s, message: params[:message])
     end
   end
+
+  def pusher_channel_name
+    "user-#{id}"
+  end
 end

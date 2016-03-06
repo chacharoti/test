@@ -29,4 +29,8 @@ class Message < ActiveRecord::Base
       raise "Unknown content_type: #{self.content_type}"
     end
   end
+
+  def pusher_data
+    Api::V1::Messages::MessageSerializer.new(self).serializable_hash
+  end
 end

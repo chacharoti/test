@@ -24,7 +24,9 @@ class Conversation < ActiveRecord::Base
   end
 
   def add_message message_params, user
-    self.messages.create(message_params.merge(user_id: user.id))
+    message = self.messages.create(message_params.merge(user_id: user.id))
+    self.send_notification_for_new_message(message)
+    message
   end
 
   def self.start_new_conversation user_ids
@@ -33,5 +35,26 @@ class Conversation < ActiveRecord::Base
     message = conversation.messages.create
     message.create_text(raw: AppSetting.start_conversation_message)
     conversation
+  end
+
+  def joining_users_excluded users
+    self.joining_users.where('users.id NOT IN (?)', users.map(&:id))
+  end
+
+  def joining_users_pusher_channels_excluded users
+    self.joining_users_excluded(users).map(&:pusher_channel_name)
+  end
+
+  def send_notification_for_new_message message
+    return unless message.valid?
+
+    # pusher
+    channel_names = self.joining_users_pusher_channels_excluded([message.user])
+    data = self.pusher_data_for_new_message(message)
+    PusherWorker.perform_async(channel_names, AppSetting::PUSHER_EVENTS[:new_message], data)
+  end
+
+  def pusher_data_for_new_message message
+    {conversation_id: self.id, message: message.pusher_data}
   end
 end

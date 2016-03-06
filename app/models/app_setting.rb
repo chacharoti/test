@@ -1,4 +1,7 @@
 class AppSetting < ActiveRecord::Base
+  PUSHER_EVENTS = {
+    new_message: "new_message"
+  }
   def self.public_items_for_user user
     items = {}
     self.where(is_public: 1).each do |app_setting|

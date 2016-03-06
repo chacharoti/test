@@ -85,6 +85,8 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     colorize (0.7.7)
+    concurrent-ruby (1.0.1)
+    connection_pool (2.2.0)
     debug_inspector (0.0.2)
     devise (3.5.2)
       bcrypt (~> 3.0)
@@ -113,6 +115,7 @@ GEM
     httparty (0.13.7)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
+    httpclient (2.7.1)
     i18n (0.7.0)
     jbuilder (2.3.2)
       activesupport (>= 3.0.0, < 5)
@@ -160,6 +163,11 @@ GEM
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
     pg (0.18.4)
+    pusher (0.17.0)
+      httpclient (~> 2.7)
+      multi_json (~> 1.0)
+      pusher-signature (~> 0.1.8)
+    pusher-signature (0.1.8)
     rack (1.6.4)
     rack-pjax (0.8.0)
       nokogiri (~> 1.5)
@@ -207,6 +215,7 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
       json (~> 1.4)
+    redis (3.2.2)
     remote_syslog_logger (1.0.3)
       syslog_protocol
     remotipart (1.2.1)
@@ -223,6 +232,10 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    sidekiq (4.1.0)
+      concurrent-ruby (~> 1.0)
+      connection_pool (~> 2.2, >= 2.2.0)
+      redis (~> 3.2, >= 3.2.1)
     simple_form (3.2.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
@@ -284,11 +297,13 @@ DEPENDENCIES
   jquery-rails
   omniauth-facebook
   pg (~> 0.18.4)
+  pusher (~> 0.17.0)
   rails (= 4.2.4)
   rails_admin (~> 0.8.1)
   remote_syslog_logger (~> 1.0, >= 1.0.3)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  sidekiq (~> 4.1)
   simple_form
   slim
   spring
