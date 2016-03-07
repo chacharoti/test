@@ -1,6 +1,6 @@
 class AppSetting < ActiveRecord::Base
   PUSHER_EVENTS = {
-    new_message: "new_message"
+    new_message: "new-message"
   }
   def self.public_items_for_user user
     items = {}
