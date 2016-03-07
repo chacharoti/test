@@ -14,6 +14,7 @@ gem 'rails_admin', '~> 0.8.1'
 gem 'remote_syslog_logger', '~> 1.0', '>= 1.0.3'
 gem 'pusher', '~> 0.17.0'
 gem 'sidekiq', '~> 4.1'
+gem 'sinatra', '~> 1.4', '>= 1.4.7'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'

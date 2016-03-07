@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     web_subdomain = 'staging'
   end
 
+  mount Sidekiq::Web, at: 'sidekiq'
+
   constraints subdomain: admin_subdomain do
     mount RailsAdmin::Engine => '/'
   end
